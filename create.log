@@ -1,0 +1,320 @@
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jun 22 13:02:06 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Last Successful login time: Tue Jun 22 2021 12:59:32 +02:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> drop index indx_vt_c_area_01;
+
+Index dropped.
+
+SQL> drop table vt_p_primary_data;
+
+Table dropped.
+
+SQL> drop table vt_s_secondary_data;
+
+Table dropped.
+
+SQL> drop table vt_c_value_type;
+
+Table dropped.
+
+SQL> drop table vt_c_aggreg_type;
+
+Table dropped.
+
+SQL> drop table vt_c_area;
+
+Table dropped.
+
+SQL> drop table vt_c_frequency_class_ome;
+
+Table dropped.
+
+SQL> drop table vt_c_class_cpp;
+
+Table dropped.
+
+SQL> drop table vt_c_interval;
+
+Table dropped.
+
+SQL> 
+SQL> create table vt_c_frequency_class_ome
+  2  (
+  3  	id number(8,0) not null ,
+  4  	code	     varchar2(6) not null,
+  5  	name	     nvarchar2(80) not null,
+  6  	description  nvarchar2(1600) not null,
+  7  	value_from   float not null,
+  8  	value_to     float
+  9  )
+ 10  ;
+
+Table created.
+
+SQL> create table vt_c_class_cpp
+  2  (
+  3  	id number(8,0) not null ,
+  4  	class	     number(2,0) not null,
+  5  	code	     varchar2(6) not null,
+  6  	name	     nvarchar2(80) not null,
+  7  	description  nvarchar2(1600) not null
+  8  )
+  9  ;
+
+Table created.
+
+SQL> create table vt_c_area
+  2  (
+  3  	id number(8,0) not null ,
+  4  	fixed_id number(4) not null,
+  5  	code varchar2(6) not null,
+  6  	name nvarchar2(80) not null
+  7  )
+  8  ;
+
+Table created.
+
+SQL> create table vt_c_aggreg_type
+  2  (
+  3  	id number(8,0) not null ,
+  4  	fixed_id number(4) not null,
+  5  	abbrev varchar2(20) not null,
+  6  	name nvarchar2(80) not null,
+  7  	description  nvarchar2(1600) not null
+  8  )
+  9  ;
+
+Table created.
+
+SQL> create table vt_c_value_type
+  2  (
+  3  	id number(8,0) not null ,
+  4  	fixed_id number(4) not null,
+  5  	abbrev varchar2(20) not null,
+  6  	name nvarchar2(80) not null,
+  7  	description  nvarchar2(1600) not null
+  8  )
+  9  ;
+
+Table created.
+
+SQL> create table vt_c_interval
+  2  (
+  3  	id number(8,0) not null ,
+  4  	interval char(19) not null,
+  5  	abbrev varchar2(10) not null
+  6  )
+  7  ;
+
+Table created.
+
+SQL> 
+SQL> create table vt_p_primary_data
+  2  (
+  3  	id_area number(8,0) not null ,
+  4  	start_time date not null,
+  5  	id_value_type number(8,0) not null ,
+  6  	value float not null
+  7  )
+  8  ;
+
+Table created.
+
+SQL> create table vt_s_secondary_data
+  2  (
+  3  	id_area number(8,0) not null ,
+  4  	start_time date not null,
+  5  	id_interval number(8,0) not null ,
+  6  	id_aggreg_type number(8,0) not null ,
+  7  	value float not null
+  8  )
+  9  ;
+
+Table created.
+
+SQL> alter table vt_c_value_type	   add constraint pk_c_value_type	   primary key (id) ;
+
+Table altered.
+
+SQL> alter table vt_c_aggreg_type	   add constraint pk_c_aggreg_type	   primary key (id) ;
+
+Table altered.
+
+SQL> alter table vt_c_area		   add constraint pk_c_area		   primary key (id) ;
+
+Table altered.
+
+SQL> alter table vt_c_frequency_class_ome  add constraint pk_c_frequency_class_ome primary key (id) ;
+
+Table altered.
+
+SQL> alter table vt_c_class_cpp 	   add constraint pk_vt_c_class_cpp	   primary key (id) ;
+
+Table altered.
+
+SQL> alter table vt_c_interval		   add constraint pk_c_interval 	   primary key (id) ;
+
+Table altered.
+
+SQL> 
+SQL> alter table vt_p_primary_data	   add constraint pk_p_primary_data	   primary key (id_area,start_time,id_value_type) ;
+
+Table altered.
+
+SQL> alter table vt_s_secondary_data	   add constraint pk_s_secondary_data	   primary key (id_area,start_time,id_interval,id_aggreg_type) ;
+
+Table altered.
+
+SQL> 
+SQL> 
+SQL> create unique index indx_vt_c_frequency_class_ome	on vt_c_frequency_class_ome (code);
+
+Index created.
+
+SQL> create unique index indx_vt_c_class_cpp_01 	on vt_c_class_cpp (class);
+
+Index created.
+
+SQL> create unique index indx_vt_c_class_cpp_02 	on vt_c_class_cpp (code);
+
+Index created.
+
+SQL> create unique index indx_vt_c_area_01		on vt_c_area (fixed_id);
+
+Index created.
+
+SQL> create unique index indx_vt_c_area_02		on vt_c_area (code);
+
+Index created.
+
+SQL> create unique index indx_vt_c_aggreg_type		on vt_c_aggreg_type (fixed_id);
+
+Index created.
+
+SQL> create unique index indx_vt_c_value_type		on vt_c_value_type (fixed_id);
+
+Index created.
+
+SQL> create unique index indx_vt_c_interval_01		on vt_c_interval (interval);
+
+Index created.
+
+SQL> create unique index indx_vt_c_interval_02		on vt_c_interval (abbrev);
+
+Index created.
+
+SQL> 
+SQL> 
+SQL> alter table vt_p_primary_data add constraint fk_p_primary_data_01	foreign key (id_area) references vt_c_area (id);
+
+Table altered.
+
+SQL> alter table vt_p_primary_data add constraint fk_p_primary_data_03	foreign key (id_value_type) references vt_c_value_type (id);
+
+Table altered.
+
+SQL> 
+SQL> alter table vt_s_secondary_data add constraint fk_s_secondary_data_01  foreign key (id_area) references vt_c_area (id);
+
+Table altered.
+
+SQL> alter table vt_s_secondary_data add constraint fk_s_secondary_data_02  foreign key (id_interval) references vt_c_interval (id);
+
+Table altered.
+
+SQL> alter table vt_s_secondary_data add constraint fk_s_secondary_data_03  foreign key (id_aggreg_type) references vt_c_aggreg_type (id);
+
+Table altered.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> grant select on vt_p_primary_data to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_s_secondary_data to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_s_secondary_data to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_c_value_type to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_c_aggreg_type to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_c_area to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_c_frequency_class_ome to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_c_class_cpp to i_read_role;
+
+Grant succeeded.
+
+SQL> grant select on vt_c_interval to i_read_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> grant insert,update,delete on vt_p_primary_data to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_s_secondary_data to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_s_secondary_data to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_c_value_type to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_c_aggreg_type to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_c_area to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_c_frequency_class_ome to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_c_class_cpp to i_edit_role;
+
+Grant succeeded.
+
+SQL> grant insert,update,delete on vt_c_interval to i_edit_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> exit;
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
