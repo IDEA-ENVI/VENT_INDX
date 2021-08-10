@@ -1,52 +1,56 @@
 
-SQL*Plus: Release 12.1.0.2.0 Production on Tue Jun 22 13:02:06 2021
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Aug 10 12:17:16 2021
 
 Copyright (c) 1982, 2014, Oracle.  All rights reserved.
 
-Last Successful login time: Tue Jun 22 2021 12:59:32 +02:00
+Last Successful login time: Wed Aug 04 2021 13:24:54 +02:00
 
 Connected to:
 Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
 With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
 
 SQL> drop index indx_vt_c_area_01;
+drop index indx_vt_c_area_01
+           *
+ERROR at line 1:
+ORA-01418: specified index does not exist
 
-Index dropped.
 
-SQL> drop table vt_p_primary_data;
-
-Table dropped.
-
-SQL> drop table vt_s_secondary_data;
-
-Table dropped.
-
-SQL> drop table vt_c_value_type;
+SQL> drop table vix_p_primary_data;
 
 Table dropped.
 
-SQL> drop table vt_c_aggreg_type;
+SQL> drop table vix_s_secondary_data;
 
 Table dropped.
 
-SQL> drop table vt_c_area;
+SQL> drop table vix_c_value_type;
 
 Table dropped.
 
-SQL> drop table vt_c_frequency_class_ome;
+SQL> drop table vix_c_aggreg_type;
 
 Table dropped.
 
-SQL> drop table vt_c_class_cpp;
+SQL> drop table vix_c_area;
 
 Table dropped.
 
-SQL> drop table vt_c_interval;
+SQL> drop table vix_c_frequency_class_ome;
+
+Table dropped.
+
+SQL> drop table vix_c_class_cpp;
+
+Table dropped.
+
+SQL> drop table vix_c_interval;
 
 Table dropped.
 
 SQL> 
-SQL> create table vt_c_frequency_class_ome
+SQL> 
+SQL> create table vix_c_frequency_class_ome
   2  (
   3  	id number(8,0) not null ,
   4  	code	     varchar2(6) not null,
@@ -59,7 +63,7 @@ SQL> create table vt_c_frequency_class_ome
 
 Table created.
 
-SQL> create table vt_c_class_cpp
+SQL> create table vix_c_class_cpp
   2  (
   3  	id number(8,0) not null ,
   4  	class	     number(2,0) not null,
@@ -71,7 +75,7 @@ SQL> create table vt_c_class_cpp
 
 Table created.
 
-SQL> create table vt_c_area
+SQL> create table vix_c_area
   2  (
   3  	id number(8,0) not null ,
   4  	fixed_id number(4) not null,
@@ -82,7 +86,7 @@ SQL> create table vt_c_area
 
 Table created.
 
-SQL> create table vt_c_aggreg_type
+SQL> create table vix_c_aggreg_type
   2  (
   3  	id number(8,0) not null ,
   4  	fixed_id number(4) not null,
@@ -94,7 +98,7 @@ SQL> create table vt_c_aggreg_type
 
 Table created.
 
-SQL> create table vt_c_value_type
+SQL> create table vix_c_value_type
   2  (
   3  	id number(8,0) not null ,
   4  	fixed_id number(4) not null,
@@ -106,7 +110,7 @@ SQL> create table vt_c_value_type
 
 Table created.
 
-SQL> create table vt_c_interval
+SQL> create table vix_c_interval
   2  (
   3  	id number(8,0) not null ,
   4  	interval char(19) not null,
@@ -117,7 +121,7 @@ SQL> create table vt_c_interval
 Table created.
 
 SQL> 
-SQL> create table vt_p_primary_data
+SQL> create table vix_p_primary_data
   2  (
   3  	id_area number(8,0) not null ,
   4  	start_time date not null,
@@ -128,7 +132,7 @@ SQL> create table vt_p_primary_data
 
 Table created.
 
-SQL> create table vt_s_secondary_data
+SQL> create table vix_s_secondary_data
   2  (
   3  	id_area number(8,0) not null ,
   4  	start_time date not null,
@@ -140,179 +144,170 @@ SQL> create table vt_s_secondary_data
 
 Table created.
 
-SQL> alter table vt_c_value_type	   add constraint pk_c_value_type	   primary key (id) ;
+SQL> alter table vix_c_value_type	    add constraint pk_c_value_type	    primary key (id) ;
 
 Table altered.
 
-SQL> alter table vt_c_aggreg_type	   add constraint pk_c_aggreg_type	   primary key (id) ;
+SQL> alter table vix_c_aggreg_type	    add constraint pk_c_aggreg_type	    primary key (id) ;
 
 Table altered.
 
-SQL> alter table vt_c_area		   add constraint pk_c_area		   primary key (id) ;
+SQL> alter table vix_c_area		    add constraint pk_c_area		    primary key (id) ;
 
 Table altered.
 
-SQL> alter table vt_c_frequency_class_ome  add constraint pk_c_frequency_class_ome primary key (id) ;
+SQL> alter table vix_c_frequency_class_ome  add constraint pk_c_frequency_class_ome primary key (id) ;
 
 Table altered.
 
-SQL> alter table vt_c_class_cpp 	   add constraint pk_vt_c_class_cpp	   primary key (id) ;
+SQL> alter table vix_c_class_cpp	    add constraint pk_vix_c_class_cpp	     primary key (id) ;
 
 Table altered.
 
-SQL> alter table vt_c_interval		   add constraint pk_c_interval 	   primary key (id) ;
-
-Table altered.
-
-SQL> 
-SQL> alter table vt_p_primary_data	   add constraint pk_p_primary_data	   primary key (id_area,start_time,id_value_type) ;
-
-Table altered.
-
-SQL> alter table vt_s_secondary_data	   add constraint pk_s_secondary_data	   primary key (id_area,start_time,id_interval,id_aggreg_type) ;
+SQL> alter table vix_c_interval 	    add constraint pk_c_interval	    primary key (id) ;
 
 Table altered.
 
 SQL> 
+SQL> alter table vix_p_primary_data	    add constraint pk_p_primary_data	    primary key (id_area,start_time,id_value_type) ;
+
+Table altered.
+
+SQL> alter table vix_s_secondary_data	    add constraint pk_s_secondary_data	    primary key (id_area,start_time,id_interval,id_aggreg_type) ;
+
+Table altered.
+
 SQL> 
-SQL> create unique index indx_vt_c_frequency_class_ome	on vt_c_frequency_class_ome (code);
+SQL> 
+SQL> create unique index indx_vix_c_frequency_class_ome  on vix_c_frequency_class_ome (code);
 
 Index created.
 
-SQL> create unique index indx_vt_c_class_cpp_01 	on vt_c_class_cpp (class);
+SQL> create unique index indx_vix_c_class_cpp_01	 on vix_c_class_cpp (class);
 
 Index created.
 
-SQL> create unique index indx_vt_c_class_cpp_02 	on vt_c_class_cpp (code);
+SQL> create unique index indx_vix_c_class_cpp_02	 on vix_c_class_cpp (code);
 
 Index created.
 
-SQL> create unique index indx_vt_c_area_01		on vt_c_area (fixed_id);
+SQL> create unique index indx_vix_c_area_01		 on vix_c_area (fixed_id);
 
 Index created.
 
-SQL> create unique index indx_vt_c_area_02		on vt_c_area (code);
+SQL> create unique index indx_vix_c_area_02		 on vix_c_area (code);
 
 Index created.
 
-SQL> create unique index indx_vt_c_aggreg_type		on vt_c_aggreg_type (fixed_id);
+SQL> create unique index indx_vix_c_aggreg_type 	 on vix_c_aggreg_type (fixed_id);
 
 Index created.
 
-SQL> create unique index indx_vt_c_value_type		on vt_c_value_type (fixed_id);
+SQL> create unique index indx_vix_c_value_type		 on vix_c_value_type (fixed_id);
 
 Index created.
 
-SQL> create unique index indx_vt_c_interval_01		on vt_c_interval (interval);
+SQL> create unique index indx_vix_c_interval_01 	 on vix_c_interval (interval);
 
 Index created.
 
-SQL> create unique index indx_vt_c_interval_02		on vt_c_interval (abbrev);
+SQL> create unique index indx_vix_c_interval_02 	 on vix_c_interval (abbrev);
 
 Index created.
 
 SQL> 
 SQL> 
-SQL> alter table vt_p_primary_data add constraint fk_p_primary_data_01	foreign key (id_area) references vt_c_area (id);
+SQL> alter table vix_p_primary_data add constraint fk_p_primary_data_01  foreign key (id_area) references vix_c_area (id);
 
 Table altered.
 
-SQL> alter table vt_p_primary_data add constraint fk_p_primary_data_03	foreign key (id_value_type) references vt_c_value_type (id);
-
-Table altered.
-
-SQL> 
-SQL> alter table vt_s_secondary_data add constraint fk_s_secondary_data_01  foreign key (id_area) references vt_c_area (id);
-
-Table altered.
-
-SQL> alter table vt_s_secondary_data add constraint fk_s_secondary_data_02  foreign key (id_interval) references vt_c_interval (id);
-
-Table altered.
-
-SQL> alter table vt_s_secondary_data add constraint fk_s_secondary_data_03  foreign key (id_aggreg_type) references vt_c_aggreg_type (id);
+SQL> alter table vix_p_primary_data add constraint fk_p_primary_data_03  foreign key (id_value_type) references vix_c_value_type (id);
 
 Table altered.
 
 SQL> 
+SQL> alter table vix_s_secondary_data add constraint fk_s_secondary_data_01	foreign key (id_area) references vix_c_area (id);
+
+Table altered.
+
+SQL> alter table vix_s_secondary_data add constraint fk_s_secondary_data_02	foreign key (id_interval) references vix_c_interval (id);
+
+Table altered.
+
+SQL> alter table vix_s_secondary_data add constraint fk_s_secondary_data_03	foreign key (id_aggreg_type) references vix_c_aggreg_type (id);
+
+Table altered.
+
+SQL> 
 SQL> 
 SQL> 
 SQL> 
 SQL> 
-SQL> grant select on vt_p_primary_data to i_read_role;
+SQL> grant select on vix_p_primary_data to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_s_secondary_data to i_read_role;
+SQL> grant select on vix_s_secondary_data to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_s_secondary_data to i_read_role;
+SQL> grant select on vix_c_value_type to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_c_value_type to i_read_role;
+SQL> grant select on vix_c_aggreg_type to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_c_aggreg_type to i_read_role;
+SQL> grant select on vix_c_area to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_c_area to i_read_role;
+SQL> grant select on vix_c_frequency_class_ome to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_c_frequency_class_ome to i_read_role;
+SQL> grant select on vix_c_class_cpp to i_read_role;
 
 Grant succeeded.
 
-SQL> grant select on vt_c_class_cpp to i_read_role;
-
-Grant succeeded.
-
-SQL> grant select on vt_c_interval to i_read_role;
+SQL> grant select on vix_c_interval to i_read_role;
 
 Grant succeeded.
 
 SQL> 
-SQL> grant insert,update,delete on vt_p_primary_data to i_edit_role;
+SQL> grant insert,update,delete on vix_p_primary_data to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_s_secondary_data to i_edit_role;
+SQL> grant insert,update,delete on vix_s_secondary_data to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_s_secondary_data to i_edit_role;
+SQL> grant insert,update,delete on vix_c_value_type to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_c_value_type to i_edit_role;
+SQL> grant insert,update,delete on vix_c_aggreg_type to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_c_aggreg_type to i_edit_role;
+SQL> grant insert,update,delete on vix_c_area to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_c_area to i_edit_role;
+SQL> grant insert,update,delete on vix_c_frequency_class_ome to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_c_frequency_class_ome to i_edit_role;
+SQL> grant insert,update,delete on vix_c_class_cpp to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_c_class_cpp to i_edit_role;
+SQL> grant insert,update,delete on vix_c_interval to i_edit_role;
 
 Grant succeeded.
 
-SQL> grant insert,update,delete on vt_c_interval to i_edit_role;
-
-Grant succeeded.
-
-SQL> 
 SQL> 
 SQL> 
 SQL> exit;

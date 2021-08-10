@@ -1,119 +1,138 @@
+OraQ: Release 1.0.7011.24225 - Production on 08/04/2021 13:13:18
+Copyright (c) 2019 IDEA-ENVIs.r.o. - All rights reserved.
 
-SQL*Plus: Release 12.1.0.2.0 Production on Tue Jun 22 13:02:24 2021
+Connection Code: VM_VIX
+         Server: jeseter
+   Service Name: jeseter
+        User Id: vix
+ Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+Connection time: 0.314 sec.
 
-Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+Start time: 2021-08-04 13:13:18
 
-Last Successful login time: Tue Jun 22 2021 13:02:01 +02:00
+SQL> delete from vix_c_interval
+0 row(s), time 0.0222 sec
 
-Connected to:
-Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
-With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+SQL> insert into vix_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d')
+1 row(s), time 0.0156 sec
 
-SQL> delete from vt_c_interval;
+SQL> insert into vix_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m')
+1 row(s), time 0.0000 sec
 
-0 rows deleted.
+SQL> insert into vix_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d');
+SQL> delete from vix_c_value_type
+0 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','PlatnÃ¡ data','PlatnÃ¡ data')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m');
+SQL> insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (2,2,'error','NeplatnÃ¡ data','NeplatnÃ¡ data')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> delete from vix_c_aggreg_type
+0 row(s), time 0.0312 sec
 
-SQL> insert into vt_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y');
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (1,1,'avg(1h)/1d','Den: aritmetickÃ½ prÅ¯mÄ›r ventilaÄnÃ­ch indexÅ¯','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Viz GagReport')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (2,2,'avg(1h)/1m','MÄ›sÃ­c: aritmetickÃ½ prÅ¯mÄ›r ventilaÄnÃ­ch indexÅ¯','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Viz GagReport')
+1 row(s), time 0.0000 sec
 
-SQL> 
-SQL> delete from vt_c_value_type;
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (3,3,'avg(1h)/1y','Rok: aritmetickÃ½ prÅ¯mÄ›r ventilaÄnÃ­ch indexÅ¯','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Viz GagReport')
+1 row(s), time 0.0000 sec
 
-0 rows deleted.
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (4,4,'%/1d','Den: Äetnosti v % podle OME','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Definice ÄetnostÃ­ viz GagReport')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','Platná data','Platná data') ;
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (5,5,'%/1m','MÄ›sÃ­c: Äetnosti v % podle OME','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Definice ÄetnostÃ­ viz GagReport')
+1 row(s), time 0.0156 sec
 
-1 row created.
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (6,6,'%/1y','Rok: Äetnosti v % podle OME','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Definice ÄetnostÃ­ viz GagReport')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_value_type (id,fixed_id,abbrev,name,description)values (2,2,'error','Neplatná data','Neplatná data') ;
+SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (7,7,'value/1d','Den: tÅ™Ã­da zaÅ™azenÃ­ VI podle CPP.','NabÃ½vÃ¡ hodnotu od 1 do 4. Viz GagReport')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> delete from vix_c_frequency_class_ome
+0 row(s), time 0.0000 sec
 
-SQL> 
-SQL> delete from vt_c_aggreg_type;
+SQL> insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'DobrÃ© RP','Äetnost hodinovÃ½ch hodnot v %' ,3000,null)
+1 row(s), time 0.0000 sec
 
-0 rows deleted.
+SQL> insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (2,'MN','MÃ­rnÄ› nepÅ™Ã­znivÃ© RP','Äetnost hodinovÃ½ch hodnot v %',1100,3000)
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (1,1,'avg(1h)/1d','Den: aritmetický prùmìr ventilaèních indexù','Minimální poèet dat pro provedení výpoètu je definován v databázi. Viz GagReport') ;
+SQL> insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (3,'N' ,'NepÅ™Ã­znivÃ© RP','Äetnost hodinovÃ½ch hodnot v %' ,0,1100)
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> delete from vix_c_class_cpp
+0 row(s), time 0.0156 sec
 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (2,2,'avg(1h)/1m','Mìsíc: aritmetický prùmìr ventilaèních indexù','Minimální poèet dat pro provedení výpoètu je definován v databázi. Viz GagReport') ;
+SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (1,1,'1D' ,'DobrÃ© RP','x')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'ÄŒÃ¡steÄnÄ› mÃ­rnÄ› neÅ™Ã­znivÃ© RP','x')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (3,3,'avg(1h)/1y','Rok: aritmetický prùmìr ventilaèních indexù','Minimální poèet dat pro provedení výpoètu je definován v databázi. Viz GagReport') ;
+SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (3,3,'3MN' ,'MÃ­rnÄ› nepÅ™Ã­znivÃ© RP','x')
+1 row(s), time 0.0065 sec
 
-1 row created.
+SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (4,4,'4N' ,'NepÅ™Ã­znivÃ© RP','x')
+1 row(s), time 0.0000 sec
 
-SQL> 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (4,4,'%/1d','Den: èetnosti v % podle OME','Minimální poèet dat pro provedení výpoètu je definován v databázi. Definice èetností viz GagReport') ;
+SQL> delete from vix_c_area
+0 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (01,1000,'CZ010' ,'Aglomerace Praha')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (5,5,'%/1m','Mìsíc: èetnosti v % podle OME','Minimální poèet dat pro provedení výpoètu je definován v databázi. Definice èetností viz GagReport') ;
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (02,2000,'CZ020' ,'StÅ™edoÄeskÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (03,3100,'CZ031' ,'JihoÄeskÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (6,6,'%/1y','Rok: èetnosti v % podle OME','Minimální poèet dat pro provedení výpoètu je definován v databázi. Definice èetností viz GagReport') ;
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (04,3200,'CZ032' ,'PlzeÅˆskÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (05,4100,'CZ041' ,'KarlovarskÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-SQL> 
-SQL> insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (7,7,'value/1d','Den: tøída zaøazení VI podle CPP.','Nabývá hodnotu od 1 do 4. Viz GagReport') ;
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (06,4200,'CZ042' ,'ÃšsteckÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (07,5100,'CZ051' ,'LibereckÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-SQL> 
-SQL> 
-SQL> delete from vt_c_frequency_class_ome;
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (08,5200,'CZ052' ,'KrÃ¡lovÃ©hradeckÃ½ kraj')
+1 row(s), time 0.0156 sec
 
-0 rows deleted.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (09,5300,'CZ053' ,'PardubickÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'Dobré RP','Èetnost hodinových hodnot v %'	     ,3000,null);
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (10,6300,'CZ063' ,'Kraj VysoÄina')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (11,6410,'CZ064Z','JihomoravskÃ½ kraj bez aglomerace Brno')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (2,'MN','Mírnì nepøíznivé RP','Èetnost hodinových hodnot v %',1100,3000);
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (12,6420,'CZ064A','Aglomerace Brno')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (13,7100,'CZ071' ,'OlomouckÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-SQL> insert into vt_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (3,'N' ,'Nepøíznivé RP','Èetnost hodinových hodnot v %'	,0,1100);
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (14,7200,'CZ072' ,'ZlÃ­nskÃ½ kraj')
+1 row(s), time 0.0000 sec
 
-1 row created.
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (15,8010,'CZ080Z','MoravskoslezskÃ½ kraj bez aglomerace O/K/F-M')
+1 row(s), time 0.0000 sec
 
-SQL> 
-SQL> 
-SQL> delete from vt_c_class_cpp;
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (16,8020,'CZ080A','Aglomerace Ostrava/KarvinÃ¡/FrÃ½dek-MÃ­stek')
+1 row(s), time 0.0157 sec
 
-0 rows deleted.
+SQL> exit
 
-SQL> insert into vt_c_class_cpp (id,class,code,name,description) values (1,1,'1D'   ,'Dobré RP','x');
-
-1 row created.
-
-SQL> insert into vt_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'Èásteènì mírnì neøíznivé RP','x');
-
-1 row created.
-
-SQL> insert into vt_c_class_cpp (id,class,code,name,description) values (3,3,'3MN'  ,'Mírnì nepøíznivé RP','x');
-
-1 row created.
-
-SQL> insert into vt_c_class_cpp (id,class,code,name,description) values (4,4,'4N'   ,'Nepøíznivé RP','x');
-
-1 row created.
-
-SQL> 
-SQL> exit;
-Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
-With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+End time: 2021-08-04 13:13:18 (elapsed: 0:0.138 sec)

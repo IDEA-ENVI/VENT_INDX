@@ -1,0 +1,31 @@
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Aug 4 09:19:42 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Last Successful login time: Wed Aug 04 2021 09:19:10 +02:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> create tablespace vix datafile 'vix.dat'
+  2  size 40M autoextend on online;
+
+Tablespace created.
+
+SQL> 
+SQL> CREATE USER vix
+  2  	 IDENTIFIED BY asd
+  3  	 DEFAULT TABLESPACE vix
+  4  	 TEMPORARY TABLESPACE temp;
+
+User created.
+
+SQL> grant dba to vix;
+
+Grant succeeded.
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options

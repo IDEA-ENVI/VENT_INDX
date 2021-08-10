@@ -1,0 +1,25 @@
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Aug 10 12:07:07 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Last Successful login time: Tue Aug 10 2021 12:06:33 +02:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> delete from gag_db_context where id=10;
+
+0 rows deleted.
+
+SQL> insert into gag_db_context (id,name,schema,table_prefix,db_model,db_version,db_role_name) values (10,'Ventilacni index','vix','vix_','vix',1,'v');
+
+1 row created.
+
+SQL> 
+SQL> exit;
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options

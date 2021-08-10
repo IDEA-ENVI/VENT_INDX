@@ -1,34 +1,56 @@
-delete from vt_c_interval;
-insert into vt_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d');
-insert into vt_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m');
-insert into vt_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y');
+delete from vix_c_interval;
+insert into vix_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d');
+insert into vix_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m');
+insert into vix_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y');
 
-delete from vt_c_value_type;
-insert into vt_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','Platná data','Platná data') ;
-insert into vt_c_value_type (id,fixed_id,abbrev,name,description)values (2,2,'error','Neplatná data','Neplatná data') ;
+delete from vix_c_value_type;
+insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','PlatnÃ¡ data','PlatnÃ¡ data') ;
+insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (2,2,'error','NeplatnÃ¡ data','NeplatnÃ¡ data') ;
 
-delete from vt_c_aggreg_type;
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (1,1,'avg(1h)/1d','Den: aritmetickı prùmìr ventilaèních indexù','Minimální poèet dat pro provedení vıpoètu je definován v databázi. Viz GagReport') ;
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (2,2,'avg(1h)/1m','Mìsíc: aritmetickı prùmìr ventilaèních indexù','Minimální poèet dat pro provedení vıpoètu je definován v databázi. Viz GagReport') ;
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (3,3,'avg(1h)/1y','Rok: aritmetickı prùmìr ventilaèních indexù','Minimální poèet dat pro provedení vıpoètu je definován v databázi. Viz GagReport') ;
+delete from vix_c_aggreg_type;
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (1,1,'avg(1h)/1d','Den: aritmetickÃ½ prÅ¯mÄ›r ventilaÄnÃ­ch indexÅ¯','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (2,2,'avg(1h)/1m','MÄ›sÃ­c: aritmetickÃ½ prÅ¯mÄ›r ventilaÄnÃ­ch indexÅ¯','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (3,3,'avg(1h)/1y','Rok: aritmetickÃ½ prÅ¯mÄ›r ventilaÄnÃ­ch indexÅ¯','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Viz GagReport') ;
 
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (4,4,'%/1d','Den: èetnosti v % podle OME','Minimální poèet dat pro provedení vıpoètu je definován v databázi. Definice èetností viz GagReport') ;
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (5,5,'%/1m','Mìsíc: èetnosti v % podle OME','Minimální poèet dat pro provedení vıpoètu je definován v databázi. Definice èetností viz GagReport') ;
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (6,6,'%/1y','Rok: èetnosti v % podle OME','Minimální poèet dat pro provedení vıpoètu je definován v databázi. Definice èetností viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (4,4,'%/1d','Den: Äetnosti v % podle OME','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Definice ÄetnostÃ­ viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (5,5,'%/1m','MÄ›sÃ­c: Äetnosti v % podle OME','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Definice ÄetnostÃ­ viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (6,6,'%/1y','Rok: Äetnosti v % podle OME','MinimÃ¡lnÃ­ poÄet dat pro provedenÃ­ vÃ½poÄtu je definovÃ¡n v databÃ¡zi. Definice ÄetnostÃ­ viz GagReport') ;
 
-insert into vt_c_aggreg_type (id,fixed_id,abbrev,name,description) values (7,7,'value/1d','Den: tøída zaøazení VI podle CPP.','Nabıvá hodnotu od 1 do 4. Viz GagReport') ;
-
-
-delete from vt_c_frequency_class_ome;
-insert into vt_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'Dobré RP','Èetnost hodinovıch hodnot v %'           ,3000,null);
-insert into vt_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (2,'MN','Mírnì nepøíznivé RP','Èetnost hodinovıch hodnot v %',1100,3000);
-insert into vt_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (3,'N' ,'Nepøíznivé RP','Èetnost hodinovıch hodnot v %'      ,0,1100);
+insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (7,7,'value/1d','Den: tÅ™Ã­da zaÅ™azenÃ­ VI podle CPP.','NabÃ½vÃ¡ hodnotu od 1 do 4. Viz GagReport') ;
 
 
-delete from vt_c_class_cpp;
-insert into vt_c_class_cpp (id,class,code,name,description) values (1,1,'1D'   ,'Dobré RP','x');
-insert into vt_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'Èásteènì mírnì neøíznivé RP','x');
-insert into vt_c_class_cpp (id,class,code,name,description) values (3,3,'3MN'  ,'Mírnì nepøíznivé RP','x');
-insert into vt_c_class_cpp (id,class,code,name,description) values (4,4,'4N'   ,'Nepøíznivé RP','x');
+delete from vix_c_frequency_class_ome;
+insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'DobrÃ© RP','Äetnost hodinovÃ½ch hodnot v %'           ,3000,null);
+insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (2,'MN','MÃ­rnÄ› nepÅ™Ã­znivÃ© RP','Äetnost hodinovÃ½ch hodnot v %',1100,3000);
+insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (3,'N' ,'NepÅ™Ã­znivÃ© RP','Äetnost hodinovÃ½ch hodnot v %'      ,0,1100);
+
+
+delete from vix_c_class_cpp;
+insert into vix_c_class_cpp (id,class,code,name,description) values (1,1,'1D'   ,'DobrÃ© RP','x');
+insert into vix_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'ÄŒÃ¡steÄnÄ› mÃ­rnÄ› neÅ™Ã­znivÃ© RP','x');
+insert into vix_c_class_cpp (id,class,code,name,description) values (3,3,'3MN'  ,'MÃ­rnÄ› nepÅ™Ã­znivÃ© RP','x');
+insert into vix_c_class_cpp (id,class,code,name,description) values (4,4,'4N'   ,'NepÅ™Ã­znivÃ© RP','x');
+
+
+delete from vix_c_area;
+insert into vix_c_area (id,fixed_id,code,name) values (01,1000,'CZ010' ,'Aglomerace Praha');
+insert into vix_c_area (id,fixed_id,code,name) values (02,2000,'CZ020' ,'StÅ™edoÄeskÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (03,3100,'CZ031' ,'JihoÄeskÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (04,3200,'CZ032' ,'PlzeÅˆskÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (05,4100,'CZ041' ,'KarlovarskÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (06,4200,'CZ042' ,'ÃšsteckÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (07,5100,'CZ051' ,'LibereckÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (08,5200,'CZ052' ,'KrÃ¡lovÃ©hradeckÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (09,5300,'CZ053' ,'PardubickÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (10,6300,'CZ063' ,'Kraj VysoÄina');
+insert into vix_c_area (id,fixed_id,code,name) values (11,6410,'CZ064Z','JihomoravskÃ½ kraj bez aglomerace Brno');
+insert into vix_c_area (id,fixed_id,code,name) values (12,6420,'CZ064A','Aglomerace Brno');
+insert into vix_c_area (id,fixed_id,code,name) values (13,7100,'CZ071' ,'OlomouckÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (14,7200,'CZ072' ,'ZlÃ­nskÃ½ kraj');
+insert into vix_c_area (id,fixed_id,code,name) values (15,8010,'CZ080Z','MoravskoslezskÃ½ kraj bez aglomerace O/K/F-M');
+insert into vix_c_area (id,fixed_id,code,name) values (16,8020,'CZ080A','Aglomerace Ostrava/KarvinÃ¡/FrÃ½dek-MÃ­stek');
 
 exit;
+
+
+
