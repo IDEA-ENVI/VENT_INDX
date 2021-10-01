@@ -1,138 +1,138 @@
-OraQ: Release 1.0.7011.24225 - Production on 08/04/2021 13:13:18
+OraQ: Release 1.0.7011.24225 - Production on 09/27/2021 13:58:22
 Copyright (c) 2019 IDEA-ENVIs.r.o. - All rights reserved.
 
-Connection Code: VM_VIX
-         Server: jeseter
-   Service Name: jeseter
+Connection Code: PHA_VIX
+         Server: pr-t5cluster-scan.chmi.cz
+   Service Name: CAQR.chmi.cz
         User Id: vix
- Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
-Connection time: 0.314 sec.
+ Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP, Advanced Analytics and Real Application Testing options
+Connection time: 0.669 sec.
 
-Start time: 2021-08-04 13:13:18
+Start time: 2021-09-27 13:58:22
 
 SQL> delete from vix_c_interval
-0 row(s), time 0.0222 sec
+0 row(s), time 0.1000 sec
 
 SQL> insert into vix_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d')
-1 row(s), time 0.0156 sec
+1 row(s), time 0.3851 sec
 
 SQL> insert into vix_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0156 sec
 
 SQL> insert into vix_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0314 sec
 
 SQL> delete from vix_c_value_type
-0 row(s), time 0.0000 sec
+0 row(s), time 0.0469 sec
 
 SQL> insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','Platná data','Platná data')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0686 sec
 
 SQL> insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (2,2,'error','Neplatná data','Neplatná data')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0379 sec
 
 SQL> delete from vix_c_aggreg_type
-0 row(s), time 0.0312 sec
+0 row(s), time 0.0315 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (1,1,'avg(1h)/1d','Den: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0689 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (2,2,'avg(1h)/1m','Měsíc: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0157 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (3,3,'avg(1h)/1y','Rok: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0336 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (4,4,'%/1d','Den: četnosti v % podle OME','Minimální počet dat pro provedení výpočtu je definován v databázi. Definice četností viz GagReport')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0157 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (5,5,'%/1m','Měsíc: četnosti v % podle OME','Minimální počet dat pro provedení výpočtu je definován v databázi. Definice četností viz GagReport')
-1 row(s), time 0.0156 sec
+1 row(s), time 0.0355 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (6,6,'%/1y','Rok: četnosti v % podle OME','Minimální počet dat pro provedení výpočtu je definován v databázi. Definice četností viz GagReport')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0157 sec
 
 SQL> insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (7,7,'value/1d','Den: třída zařazení VI podle CPP.','Nabývá hodnotu od 1 do 4. Viz GagReport')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0364 sec
 
 SQL> delete from vix_c_frequency_class_ome
-0 row(s), time 0.0000 sec
+0 row(s), time 0.0313 sec
 
 SQL> insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'Dobré RP','četnost hodinových hodnot v %' ,3000,null)
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0793 sec
 
 SQL> insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (2,'MN','Mírně nepříznivé RP','četnost hodinových hodnot v %',1100,3000)
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0153 sec
 
 SQL> insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (3,'N' ,'Nepříznivé RP','četnost hodinových hodnot v %' ,0,1100)
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0381 sec
 
 SQL> delete from vix_c_class_cpp
-0 row(s), time 0.0156 sec
+0 row(s), time 0.0309 sec
 
 SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (1,1,'1D' ,'Dobré RP','x')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0849 sec
 
 SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'Částečně mírně neříznivé RP','x')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0157 sec
 
 SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (3,3,'3MN' ,'Mírně nepříznivé RP','x')
-1 row(s), time 0.0065 sec
+1 row(s), time 0.0314 sec
 
 SQL> insert into vix_c_class_cpp (id,class,code,name,description) values (4,4,'4N' ,'Nepříznivé RP','x')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0221 sec
 
 SQL> delete from vix_c_area
-0 row(s), time 0.0000 sec
+0 row(s), time 0.0487 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (01,1000,'CZ010' ,'Aglomerace Praha')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0677 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (02,2000,'CZ020' ,'Středočeský kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0308 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (03,3100,'CZ031' ,'Jihočeský kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0316 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (04,3200,'CZ032' ,'Plzeňský kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0218 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (05,4100,'CZ041' ,'Karlovarský kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0316 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (06,4200,'CZ042' ,'Ústecký kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0309 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (07,5100,'CZ051' ,'Liberecký kraj')
-1 row(s), time 0.0000 sec
-
-SQL> insert into vix_c_area (id,fixed_id,code,name) values (08,5200,'CZ052' ,'Královéhradecký kraj')
 1 row(s), time 0.0156 sec
 
+SQL> insert into vix_c_area (id,fixed_id,code,name) values (08,5200,'CZ052' ,'Královéhradecký kraj')
+1 row(s), time 0.0222 sec
+
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (09,5300,'CZ053' ,'Pardubický kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0313 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (10,6300,'CZ063' ,'Kraj Vysočina')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0315 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (11,6410,'CZ064Z','Jihomoravský kraj bez aglomerace Brno')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0156 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (12,6420,'CZ064A','Aglomerace Brno')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0379 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (13,7100,'CZ071' ,'Olomoucký kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0312 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (14,7200,'CZ072' ,'Zlínský kraj')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0156 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (15,8010,'CZ080Z','Moravskoslezský kraj bez aglomerace O/K/F-M')
-1 row(s), time 0.0000 sec
+1 row(s), time 0.0313 sec
 
 SQL> insert into vix_c_area (id,fixed_id,code,name) values (16,8020,'CZ080A','Aglomerace Ostrava/Karviná/Frýdek-Místek')
-1 row(s), time 0.0157 sec
+1 row(s), time 0.0223 sec
 
 SQL> exit
 
-End time: 2021-08-04 13:13:18 (elapsed: 0:0.138 sec)
+End time: 2021-09-27 13:58:24 (elapsed: 0:1.804 sec)
