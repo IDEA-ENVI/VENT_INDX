@@ -1,9 +1,9 @@
+/*
 create role vix_rw_role;
 grant vix_rw_role to pollution with admin option;
 grant vix_rw_role to novak with admin option;
 grant vix_rw_role to novakv with admin option;
-
-
+*/
 
 drop index indx_vt_c_area_01;
 drop table vix_p_primary_data;
@@ -125,6 +125,5 @@ grant select,insert,update,delete on vix_c_area to vix_rw_role;
 grant select,insert,update,delete on vix_c_frequency_class_ome to vix_rw_role;
 grant select,insert,update,delete on vix_c_class_cpp to vix_rw_role;
 grant select,insert,update,delete on vix_c_interval to vix_rw_role;
-
 
 exit;
