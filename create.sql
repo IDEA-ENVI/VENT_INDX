@@ -4,6 +4,15 @@ grant vix_rw_role to pollution with admin option;
 grant vix_rw_role to novak with admin option;
 grant vix_rw_role to novakv with admin option;
 */
+grant m_read_role to novak with admin option;
+grant e_read_role to novak with admin option;
+grant vix_rw_role to novak with admin option;
+
+
+grant m_read_role to novakv with admin option;
+grant e_read_role to novakv with admin option;
+grant vix_rw_role to novakv with admin option;
+
 
 drop index indx_vt_c_area_01;
 drop table vix_p_primary_data;
