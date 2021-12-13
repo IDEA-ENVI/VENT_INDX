@@ -50,7 +50,8 @@ insert into vix_c_area (id,fixed_id,code,name) values (14,7200,'CZ072' ,'Zlínsk
 insert into vix_c_area (id,fixed_id,code,name) values (15,8010,'CZ080Z','Moravskoslezský kraj bez aglomerace O/K/F-M');
 insert into vix_c_area (id,fixed_id,code,name) values (16,8020,'CZ080A','Aglomerace Ostrava/Karviná/Frýdek-Místek');
 
-exit;
+insert into vix.vix_c_area (id, fixed_id, code, name) values (0,1,'CZ','Česká republika');
 
+exit;
 
 
