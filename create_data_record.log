@@ -1,0 +1,68 @@
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Feb 2 17:59:40 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Last Successful login time: Wed Feb 02 2022 17:59:17 +01:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> drop table vix_c_data_record;
+drop table vix_c_data_record
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> 
+SQL> 
+SQL> create table vix_c_data_record
+  2  (
+  3  	id	   number(8,0) not null ,
+  4  	id_area    number(8,0) not null ,
+  5  	start_time date not null,
+  6  	end_time   date not null);
+
+Table created.
+
+SQL> 
+SQL> alter table vix_c_data_record	     add constraint pk_vix_c_data_record	  primary key (id) ;
+
+Table altered.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> grant select,insert,update,delete on vix_c_data_record to vix_rw_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> drop sequence vix_id_data_record;
+
+Sequence dropped.
+
+SQL> create sequence vix_id_data_record
+  2  minvalue 1
+  3  maxvalue 99999999
+  4  start with 1
+  5  increment by 1
+  6  cache 10
+  7  cycle
+  8  ;
+
+Sequence created.
+
+SQL> grant select on vix_id_data_record to vix_rw_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> 
+SQL> exit;
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options

@@ -1,7 +1,3 @@
-delete from vix_c_interval;
-insert into vix_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d');
-insert into vix_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m');
-insert into vix_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y');
 
 delete from vix_c_value_type;
 insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','Platná data','Platná data') ;
@@ -53,5 +49,4 @@ insert into vix_c_area (id,fixed_id,code,name) values (16,8020,'CZ080A','Aglomer
 insert into vix.vix_c_area (id, fixed_id, code, name) values (0,1,'CZ','Česká republika');
 
 exit;
-
 
