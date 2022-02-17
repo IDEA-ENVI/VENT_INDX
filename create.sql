@@ -1,3 +1,6 @@
+--drop table vix_c_class_cpp;
+--drop table vix_c_frequency_class_ome;
+--drop table vix_c_interval;
 /*
 create role vix_rw_role;
 grant vix_rw_role to pollution with admin option;
@@ -20,9 +23,6 @@ drop table vix_s_secondary_data;
 drop table vix_c_value_type;
 drop table vix_c_aggreg_type;
 drop table vix_c_area;
-drop table vix_c_frequency_class_ome;
-drop table vix_c_class_cpp;
-drop table vix_c_interval;
 drop table vix_c_data_record;
 
 create table vix_c_data_record
@@ -33,6 +33,7 @@ create table vix_c_data_record
    end_time   date not null);
 
 
+/*
 create table vix_c_frequency_class_ome
 (
    id number(8,0) not null ,
@@ -43,6 +44,8 @@ create table vix_c_frequency_class_ome
    value_to     float
 )
 ;
+*/
+/*
 create table vix_c_class_cpp
 (
    id number(8,0) not null ,
@@ -52,6 +55,7 @@ create table vix_c_class_cpp
    description  nvarchar2(1600) not null
 )
 ;
+*/
 create table vix_c_area
 (
    id number(8,0) not null ,
@@ -101,16 +105,16 @@ alter table vix_c_data_record          add constraint pk_vix_c_data_record     p
 alter table vix_c_value_type           add constraint pk_c_value_type          primary key (id) ;
 alter table vix_c_aggreg_type          add constraint pk_c_aggreg_type         primary key (id) ;
 alter table vix_c_area                 add constraint pk_c_area                primary key (id) ;
-alter table vix_c_frequency_class_ome  add constraint pk_c_frequency_class_ome primary key (id) ;
-alter table vix_c_class_cpp            add constraint pk_vix_c_class_cpp        primary key (id) ;
+--alter table vix_c_frequency_class_ome  add constraint pk_c_frequency_class_ome primary key (id) ;
+--alter table vix_c_class_cpp            add constraint pk_vix_c_class_cpp        primary key (id) ;
 
 alter table vix_p_primary_data         add constraint pk_p_primary_data        primary key (id_area,start_time,id_value_type) ;
 alter table vix_s_secondary_data       add constraint pk_s_secondary_data      primary key (id_area,start_time,id_aggreg_type) ;
 
 
-create unique index indx_vix_c_frequency_class_ome  on vix_c_frequency_class_ome (code);
-create unique index indx_vix_c_class_cpp_01         on vix_c_class_cpp (class);
-create unique index indx_vix_c_class_cpp_02         on vix_c_class_cpp (code);
+--create unique index indx_vix_c_frequency_class_ome  on vix_c_frequency_class_ome (code);
+--create unique index indx_vix_c_class_cpp_01         on vix_c_class_cpp (class);
+--create unique index indx_vix_c_class_cpp_02         on vix_c_class_cpp (code);
 create unique index indx_vix_c_area_01              on vix_c_area (fixed_id);
 create unique index indx_vix_c_area_02              on vix_c_area (code);
 create unique index indx_vix_c_aggreg_type          on vix_c_aggreg_type (fixed_id);
@@ -130,8 +134,8 @@ grant select,insert,update,delete on vix_s_secondary_data to vix_rw_role;
 grant select,insert,update,delete on vix_c_value_type to vix_rw_role;
 grant select,insert,update,delete on vix_c_aggreg_type to vix_rw_role;
 grant select,insert,update,delete on vix_c_area to vix_rw_role;
-grant select,insert,update,delete on vix_c_frequency_class_ome to vix_rw_role;
-grant select,insert,update,delete on vix_c_class_cpp to vix_rw_role;
+--grant select,insert,update,delete on vix_c_frequency_class_ome to vix_rw_role;
+--grant select,insert,update,delete on vix_c_class_cpp to vix_rw_role;
 
 drop sequence vix_id_data_record;
 create sequence vix_id_data_record
