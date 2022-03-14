@@ -1,13 +1,14 @@
 
-SQL*Plus: Release 12.1.0.2.0 Production on Mon Feb 14 12:10:20 2022
+SQL*Plus: Release 12.1.0.2.0 Production on Mon Mar 14 08:54:41 2022
 
 Copyright (c) 1982, 2014, Oracle.  All rights reserved.
 
-Last Successful login time: Mon Feb 14 2022 12:09:16 +01:00
+Last Successful login time: Mon Mar 14 2022 08:47:44 +01:00
 
 Connected to:
-Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
-With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
 
 SQL> set serveroutput on size 100000;
 SQL> alter session set NLS_NUMERIC_CHARACTERS='. ';
@@ -72,83 +73,83 @@ SQL> create or replace procedure vix_aggreg (year in number)
  55  	      where fixed_id=1;
  56  
  57  	      select id into w_id_aggreg_type_avg_1d
- 58  	      from vix_c_aggreg_type
+ 58  	      from vix.vix_c_aggreg_type
  59  	      where fixed_id=1;
  60  
  61  	      select id into w_id_aggreg_type_avg_1m
- 62  	      from vix_c_aggreg_type
+ 62  	      from vix.vix_c_aggreg_type
  63  	      where fixed_id=2;
  64  
  65  	      select id into w_id_aggreg_type_avg_1y
- 66  	      from vix_c_aggreg_type
+ 66  	      from vix.vix_c_aggreg_type
  67  	      where fixed_id=3;
  68  
  69  	      select id into  w_id_aggreg_type_ome_d1
- 70  	      from vix_c_aggreg_type
+ 70  	      from vix.vix_c_aggreg_type
  71  	      where fixed_id=4;
  72  
  73  	      select id into  w_id_aggreg_type_ome_d2
- 74  	      from vix_c_aggreg_type
+ 74  	      from vix.vix_c_aggreg_type
  75  	      where fixed_id=5;
  76  
  77  	      select id into  w_id_aggreg_type_ome_d3
- 78  	      from vix_c_aggreg_type
+ 78  	      from vix.vix_c_aggreg_type
  79  	      where fixed_id=6;
  80  
  81  	      select id into  w_id_aggreg_type_ome_m1
- 82  	      from vix_c_aggreg_type
+ 82  	      from vix.vix_c_aggreg_type
  83  	      where fixed_id=7;
  84  
  85  	      select id into  w_id_aggreg_type_ome_m2
- 86  	      from vix_c_aggreg_type
+ 86  	      from vix.vix_c_aggreg_type
  87  	      where fixed_id=8;
  88  
  89  	      select id into  w_id_aggreg_type_ome_m3
- 90  	      from vix_c_aggreg_type
+ 90  	      from vix.vix_c_aggreg_type
  91  	      where fixed_id=9;
  92  
  93  	      select id into  w_id_aggreg_type_ome_y1
- 94  	      from vix_c_aggreg_type
+ 94  	      from vix.vix_c_aggreg_type
  95  	      where fixed_id=10;
  96  
  97  	      select id into  w_id_aggreg_type_ome_y2
- 98  	      from vix_c_aggreg_type
+ 98  	      from vix.vix_c_aggreg_type
  99  	      where fixed_id=11;
 100  
 101  	      select id into  w_id_aggreg_type_ome_y3
-102  	      from vix_c_aggreg_type
+102  	      from vix.vix_c_aggreg_type
 103  	      where fixed_id=12;
 104  
 105  	      select id into  w_id_aggreg_type_cpp
-106  	      from vix_c_aggreg_type
+106  	      from vix.vix_c_aggreg_type
 107  	      where fixed_id=13;
 108  
 109  	      -- Pri nahravani zatim nevytvarime data_record, tak si ho vytvorime zde z primarnich dat po mesicich.
-110  	      delete from vix_c_data_record;
+110  	      delete from vix.vix_c_data_record;
 111  
-112  	      insert into vix_c_data_record (id,id_area,start_time,end_time)
-113  	      select vix_id_data_record.nextval,id_area,start_time,end_time from (
+112  	      insert into vix.vix_c_data_record (id,id_area,start_time,end_time)
+113  	      select vix.vix_id_data_record.nextval,id_area,start_time,end_time from (
 114  	      select distinct id_area,trunc(start_time,'month') as start_time ,add_months(trunc(start_time,'month'),1) as end_time
-115  	      from vix_p_primary_data
+115  	      from vix.vix_p_primary_data
 116  	      order by id_area,trunc(start_time,'month'));
 117  
 118  	      for rec_tab0 in (
 119  		 select id,id_area,start_time,end_time
-120  		 from vix_c_data_record
+120  		 from vix.vix_c_data_record
 121  		 order by id
 122  		 )
 123  	      loop
-124  		 delete from vix_s_secondary_data
+124  		 delete from vix.vix_s_secondary_data
 125  		 where id_area=rec_tab0.id_area
 126  		 and start_time>=rec_tab0.start_time
 127  		 and start_time< rec_tab0.end_time;
 128  		 commit;
 129  	      end loop;
 130  
-131  	      -- Cyklus pres vix_c_data_record
+131  	      -- Cyklus pres vix.vix_c_data_record
 132  	      for rec_tab1 in (
 133  		 select id,id_area,start_time,end_time
-134  		 from vix_c_data_record
+134  		 from vix.vix_c_data_record
 135  		 order by id
 136  		 )
 137  	      loop
@@ -159,7 +160,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 142  		 while (w_running_time < w_end_time) loop -- cyklus po hodine
 143  		    -- denni prumery
 144  		    select avg(value),count(value) into w_value,w_count
-145  		    from vix_p_primary_data
+145  		    from vix.vix_p_primary_data
 146  		    where id_area=rec_tab1.id_area
 147  		    and start_time>=w_running_time
 148  		    and start_time< w_running_time + 1
@@ -167,12 +168,12 @@ SQL> create or replace procedure vix_aggreg (year in number)
 150  		    and value is not null;
 151  
 152  		    if w_count > w_min_values_1d then
-153  		       insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+153  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 154  		       values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_avg_1d,w_value);
 155  		    end if;
 156  		    -- rozdeleni cetnosti podle OME - denni
 157  		    select count(value) into w_count_1
-158  		    from vix_p_primary_data
+158  		    from vix.vix_p_primary_data
 159  		    where id_area=rec_tab1.id_area
 160  		    and start_time>=w_running_time
 161  		    and start_time< w_running_time + 1
@@ -180,7 +181,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 163  		    and value > 3000;
 164  
 165  		    select count(value) into w_count_2
-166  		    from vix_p_primary_data
+166  		    from vix.vix_p_primary_data
 167  		    where id_area=rec_tab1.id_area
 168  		    and start_time>=w_running_time
 169  		    and start_time< w_running_time + 1
@@ -188,25 +189,25 @@ SQL> create or replace procedure vix_aggreg (year in number)
 171  		    and value > 1100 and value <= 3000;
 172  
 173  		    select count(value) into w_count_3
-174  		    from vix_p_primary_data
+174  		    from vix.vix_p_primary_data
 175  		    where id_area=rec_tab1.id_area
 176  		    and start_time>=w_running_time
 177  		    and start_time< w_running_time + 1
 178  		    and id_value_type=w_id_value_type_data
 179  		    and value < 1100;
 180  
-181  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+181  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 182  		    values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d1,100*w_count_1/w_count);
 183  
-184  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+184  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 185  		    values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d2,100*w_count_2/w_count);
 186  
-187  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+187  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 188  		    values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d3,100*w_count_3/w_count);
 189  		    commit;
 190  		    -- rozdeleni cetnosti podle CPP/RPP - denni
 191  		    select count(value) into w_count_1
-192  		    from vix_p_primary_data
+192  		    from vix.vix_p_primary_data
 193  		    where id_area=rec_tab1.id_area
 194  		    and start_time>=w_running_time
 195  		    and start_time< w_running_time + 1
@@ -219,7 +220,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 202  		       w_id_aggreg_type_cpp_value := 2;
 203  		    else
 204  		       select count(value) into w_count_2
-205  		       from vix_p_primary_data
+205  		       from vix.vix_p_primary_data
 206  		       where id_area=rec_tab1.id_area
 207  		       and start_time>=w_running_time
 208  		       and start_time< w_running_time + 1
@@ -227,7 +228,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 210  		       and value <= 3000;
 211  
 212  		       select count(value) into w_count_3
-213  		       from vix_p_primary_data
+213  		       from vix.vix_p_primary_data
 214  		       where id_area=rec_tab1.id_area
 215  		       and start_time>=w_running_time
 216  		       and start_time< w_running_time + 1
@@ -239,7 +240,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 222  			  w_id_aggreg_type_cpp_value := 4;
 223  		       end if;
 224  		    end if;
-225  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+225  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 226  		    values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_cpp,w_id_aggreg_type_cpp_value);
 227  		    commit;
 228  
@@ -248,7 +249,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 231  
 232  		 for rec_tab2 in (
 233  		    select avg(value) as value,count(*) as count
-234  		    from vix_p_primary_data
+234  		    from vix.vix_p_primary_data
 235  		    where id_area=rec_tab1.id_area
 236  		    and start_time>=rec_tab1.start_time
 237  		    and start_time< rec_tab1.end_time
@@ -259,13 +260,13 @@ SQL> create or replace procedure vix_aggreg (year in number)
 242  		    w_count := rec_tab2.count;
 243  		    -- mesicni prumery
 244  		    if w_count > w_min_values_1m then
-245  		       insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+245  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 246  		       values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_avg_1m,rec_tab2.value);
 247  		    end if;
 248  		    commit;
 249  		    -- rozdeleni cetnosti podle OME - mesicni
 250  		    select count(value) into w_count_1
-251  		    from vix_p_primary_data
+251  		    from vix.vix_p_primary_data
 252  		    where id_area=rec_tab1.id_area
 253  		    and start_time>=w_start_time
 254  		    and start_time< w_end_time
@@ -273,7 +274,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 256  		    and value > 3000;
 257  
 258  		    select count(value) into w_count_2
-259  		    from vix_p_primary_data
+259  		    from vix.vix_p_primary_data
 260  		    where id_area=rec_tab1.id_area
 261  		    and start_time>=w_start_time
 262  		    and start_time< w_end_time
@@ -281,20 +282,20 @@ SQL> create or replace procedure vix_aggreg (year in number)
 264  		    and value > 1100 and value <= 3000;
 265  
 266  		    select count(value) into w_count_3
-267  		    from vix_p_primary_data
+267  		    from vix.vix_p_primary_data
 268  		    where id_area=rec_tab1.id_area
 269  		    and start_time>=w_start_time
 270  		    and start_time< w_end_time
 271  		    and id_value_type=w_id_value_type_data
 272  		    and value < 1100;
 273  
-274  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+274  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 275  		    values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m1,100*w_count_1/w_count);
 276  
-277  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+277  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 278  		    values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m2,100*w_count_2/w_count);
 279  
-280  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+280  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 281  		    values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m3,100*w_count_3/w_count);
 282  		    commit;
 283  
@@ -305,27 +306,27 @@ SQL> create or replace procedure vix_aggreg (year in number)
 288  	      -- rocni prumery
 289  	      for rec_tab3 in (
 290  		 select distinct id_area,trunc(start_time,'year') as start_time,add_months(trunc(start_time,'year'),12) as end_time
-291  		 from vix_c_data_record
+291  		 from vix.vix_c_data_record
 292  		 order by id_area
 293  		 )
 294  	      loop
 295  		 w_start_time := rec_tab3.start_time;
 296  		 w_end_time   := rec_tab3.end_time;
 297  		 select avg(value),count(*) into w_value,w_count
-298  		 from vix_p_primary_data
+298  		 from vix.vix_p_primary_data
 299  		 where id_area=rec_tab3.id_area
 300  		 and start_time>=rec_tab3.start_time
 301  		 and start_time< rec_tab3.end_time
 302  		 and id_value_type=w_id_value_type_data
 303  		 and value is not null;
 304  		 if w_count > w_min_values_1y then
-305  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+305  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 306  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_avg_1y,w_value);
 307  		    commit;
 308  		 end if;
 309  		    -- rozdeleni cetnosti podle OME - rocni
 310  		    select count(value) into w_count_1
-311  		    from vix_p_primary_data
+311  		    from vix.vix_p_primary_data
 312  		    where id_area=rec_tab3.id_area
 313  		    and start_time>=w_start_time
 314  		    and start_time< w_end_time
@@ -333,7 +334,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 316  		    and value > 3000;
 317  
 318  		    select count(value) into w_count_2
-319  		    from vix_p_primary_data
+319  		    from vix.vix_p_primary_data
 320  		    where id_area=rec_tab3.id_area
 321  		    and start_time>=w_start_time
 322  		    and start_time< w_end_time
@@ -341,25 +342,25 @@ SQL> create or replace procedure vix_aggreg (year in number)
 324  		    and value > 1100 and value <= 3000;
 325  
 326  		    select count(value) into w_count_3
-327  		    from vix_p_primary_data
+327  		    from vix.vix_p_primary_data
 328  		    where id_area=rec_tab3.id_area
 329  		    and start_time>=w_start_time
 330  		    and start_time< w_end_time
 331  		    and id_value_type=w_id_value_type_data
 332  		    and value < 1100;
 333  
-334  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+334  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 335  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y1,100*w_count_1/w_count);
 336  
-337  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+337  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 338  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y2,100*w_count_2/w_count);
 339  
-340  		    insert into vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+340  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
 341  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y3,100*w_count_3/w_count);
 342  		    commit;
 343  	      end loop;
 344  
-345  	      delete from vix_c_data_record;
+345  	      delete from vix.vix_c_data_record;
 346  	   end;
 347  end vix_aggreg;
 348  /
@@ -370,12 +371,19 @@ SQL> grant execute on vix_aggreg to vix_rw_role;
 
 Grant succeeded.
 
+SQL> create or replace public synonym vix_aggreg for vix_aggreg;
+create or replace public synonym vix_aggreg for vix_aggreg
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
 SQL> 
 SQL> select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
 
 TO_CHAR(CURRENT_DAT
 -------------------
-2022-02-14 12:10:16
+2022-03-14 08:54:44
 
 SQL> 
 SQL> execute vix_aggreg(1);
@@ -387,9 +395,10 @@ SQL> select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
 
 TO_CHAR(CURRENT_DAT
 -------------------
-2022-02-14 12:10:17
+2022-03-14 08:54:46
 
 SQL> 
 SQL> exit;
-Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.1.0 - 64bit Production
-With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
