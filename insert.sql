@@ -1,26 +1,30 @@
+delete from vix_c_aggreg_type;
+delete from vix_c_interval;
+insert into vix_c_interval (id,interval,abbrev) values (1,'0000-00-01 00:00:00','1d') ;
+insert into vix_c_interval (id,interval,abbrev) values (2,'0000-01-00 00:00:00','1m') ;
+insert into vix_c_interval (id,interval,abbrev) values (3,'0001-00-00 00:00:00','1y') ;
 
 delete from vix_c_value_type;
 insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (1,1,'valid','Platná data','Platná data') ;
 insert into vix_c_value_type (id,fixed_id,abbrev,name,description)values (2,2,'error','Neplatná data','Neplatná data') ;
 
-delete from vix_c_aggreg_type;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (1,1,'avg(1h)/1d','Den: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (2,2,'avg(1h)/1m','Měsíc: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (3,3,'avg(1h)/1y','Rok: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (1,1,1,'avg(1h)/1d','Den: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (2,2,2,'avg(1h)/1m','Měsíc: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (3,3,3,'avg(1h)/1y','Rok: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (4,4,'%/1d D' ,'Den: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (5,5,'%/1d MN','Den: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (6,6,'%/1d N' ,'Den: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (4,4,1,'%/1d D' ,'Den: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (5,5,1,'%/1d MN','Den: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (6,6,1,'%/1d N' ,'Den: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (7,7,'%/1m D' ,'Měsíc: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (8,8,'%/1m MN','Měsíc: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (9,9,'%/1m N' ,'Měsíc: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (7,7,2,'%/1m D' ,'Měsíc: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (8,8,2,'%/1m MN','Měsíc: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (9,9,2,'%/1m N' ,'Měsíc: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (10,10,'%/1y D' ,'Rok: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (11,11,'%/1y MN','Rok: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (12,12,'%/1y N' ,'Rok: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (10,10,3,'%/1y D' ,'Rok: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (11,11,3,'%/1y MN','Rok: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (12,12,3,'%/1y N' ,'Rok: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,abbrev,name,description) values (13,13,'CPP','Den: Třída rozptylových podmínek 1 až 4.','Čtyři třídy rozptylových podmínek charakterizované čísly 1 až 4.') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (13,13,1,'CPP','Den: Třída rozptylových podmínek 1 až 4.','Čtyři třídy rozptylových podmínek charakterizované čísly 1 až 4.') ;
 
 delete from vix_c_frequency_class_ome;
 insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'Dobré RP','četnost hodinových hodnot v %'           ,3000,null);

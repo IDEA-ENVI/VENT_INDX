@@ -1,4 +1,4 @@
-OraQ: Release 1.0.7011.24225 - Production on 02/14/2022 12:06:41
+OraQ: Release 1.0.7011.24225 - Production on 04/01/2022 13:37:09
 Copyright (c) 2019 IDEA-ENVIs.r.o. - All rights reserved.
 
 Connection Code: PHA_VIX
@@ -6,154 +6,163 @@ Connection Code: PHA_VIX
    Service Name: CAQR.chmi.cz
         User Id: vix
  Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP, Advanced Analytics and Real Application Testing options
-Connection time: 0.698 sec.
+Connection time: 1.588 sec.
 
-Start time: 2022-02-14 12:06:41
-
-SQL> drop index indx_vt_c_area_01
-[ERROR] ORA-01418: specified index does not exist
-
-SQL> drop table vix_p_primary_data
--1 row(s), time 0.1635 sec
-
-SQL> drop table vix_s_secondary_data
--1 row(s), time 0.1384 sec
-
-SQL> drop table vix_c_value_type
--1 row(s), time 0.1790 sec
-
-SQL> drop table vix_c_aggreg_type
--1 row(s), time 0.1696 sec
-
-SQL> drop table vix_c_area
--1 row(s), time 0.2008 sec
-
-SQL> drop table vix_c_frequency_class_ome
--1 row(s), time 0.1854 sec
+Start time: 2022-04-01 13:37:10
 
 SQL> drop table vix_c_class_cpp
--1 row(s), time 0.2324 sec
-
-SQL> drop table vix_c_interval
 [ERROR] ORA-00942: table or view does not exist
 
+SQL> drop table vix_c_frequency_class_ome
+[ERROR] ORA-00942: table or view does not exist
+
+SQL> drop table vix_c_interval cascade constraint
+[ERROR] ORA-00942: table or view does not exist
+
+SQL> drop table vix_p_primary_data
+-1 row(s), time 0.5637 sec
+
+SQL> drop table vix_s_secondary_data
+-1 row(s), time 0.1228 sec
+
+SQL> drop table vix_c_value_type
+-1 row(s), time 0.1634 sec
+
+SQL> drop table vix_c_aggreg_type
+-1 row(s), time 0.1379 sec
+
+SQL> drop table vix_c_area
+-1 row(s), time 0.2014 sec
+
 SQL> drop table vix_c_data_record
--1 row(s), time 0.1162 sec
+-1 row(s), time 0.1314 sec
+
+SQL> create table vix_c_interval ( id number(8,0) not null , interval nvarchar2(19) not null , abbrev nvarchar2(10) not null)
+-1 row(s), time 0.1320 sec
 
 SQL> create table vix_c_data_record ( id number(8,0) not null , id_area number(8,0) not null , start_time date not null, end_time date not null)
--1 row(s), time 0.0622 sec
+-1 row(s), time 0.0536 sec
 
 SQL> create table vix_c_frequency_class_ome ( id number(8,0) not null , code varchar2(6) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null, value_from float not null, value_to float )
--1 row(s), time 0.0640 sec
+-1 row(s), time 0.0467 sec
 
 SQL> create table vix_c_class_cpp ( id number(8,0) not null , class number(2,0) not null, code varchar2(6) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null )
--1 row(s), time 0.0577 sec
+-1 row(s), time 0.0688 sec
 
 SQL> create table vix_c_area ( id number(8,0) not null , fixed_id number(4) not null, code varchar2(6) not null, name nvarchar2(80) not null )
--1 row(s), time 0.0530 sec
+-1 row(s), time 0.0471 sec
 
-SQL> create table vix_c_aggreg_type ( id number(8,0) not null , fixed_id number(4) not null, abbrev varchar2(20) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null )
--1 row(s), time 0.0584 sec
+SQL> create table vix_c_aggreg_type ( id number(8,0) not null , fixed_id number(4) not null, id_interval number(8,0) not null , abbrev varchar2(20) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null )
+-1 row(s), time 0.0534 sec
 
 SQL> create table vix_c_value_type ( id number(8,0) not null , fixed_id number(4) not null, abbrev varchar2(20) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null )
--1 row(s), time 0.0550 sec
+-1 row(s), time 0.0535 sec
 
 SQL> create table vix_p_primary_data ( id_area number(8,0) not null , start_time date not null, id_value_type number(8,0) not null , value float not null )
--1 row(s), time 0.0520 sec
+-1 row(s), time 0.0469 sec
 
 SQL> create table vix_s_secondary_data ( id_area number(8,0) not null , start_time date not null, id_aggreg_type number(8,0) not null , value float not null )
--1 row(s), time 0.0640 sec
+-1 row(s), time 0.0470 sec
 
 SQL> alter table vix_c_data_record add constraint pk_vix_c_data_record primary key (id)
--1 row(s), time 0.0700 sec
+-1 row(s), time 0.0849 sec
 
 SQL> alter table vix_c_value_type add constraint pk_c_value_type primary key (id)
--1 row(s), time 0.0663 sec
+-1 row(s), time 0.0537 sec
 
 SQL> alter table vix_c_aggreg_type add constraint pk_c_aggreg_type primary key (id)
--1 row(s), time 0.0640 sec
+-1 row(s), time 0.0465 sec
 
 SQL> alter table vix_c_area add constraint pk_c_area primary key (id)
--1 row(s), time 0.0670 sec
+-1 row(s), time 0.0536 sec
 
 SQL> alter table vix_c_frequency_class_ome add constraint pk_c_frequency_class_ome primary key (id)
--1 row(s), time 0.0612 sec
+-1 row(s), time 0.0627 sec
 
 SQL> alter table vix_c_class_cpp add constraint pk_vix_c_class_cpp primary key (id)
--1 row(s), time 0.0610 sec
+-1 row(s), time 0.0536 sec
 
-SQL> alter table vix_p_primary_data add constraint pk_p_primary_data primary key (id_area,start_time,id_value_type)
--1 row(s), time 0.0647 sec
-
-SQL> alter table vix_s_secondary_data add constraint pk_s_secondary_data primary key (id_area,start_time,id_aggreg_type)
--1 row(s), time 0.0737 sec
-
-SQL> create unique index indx_vix_c_frequency_class_ome on vix_c_frequency_class_ome (code)
--1 row(s), time 0.1011 sec
-
-SQL> create unique index indx_vix_c_class_cpp_01 on vix_c_class_cpp (class)
--1 row(s), time 0.0515 sec
-
-SQL> create unique index indx_vix_c_class_cpp_02 on vix_c_class_cpp (code)
--1 row(s), time 0.0520 sec
-
-SQL> create unique index indx_vix_c_area_01 on vix_c_area (fixed_id)
+SQL> alter table vix_c_interval add constraint pk_vix_c_interval primary key (id)
 -1 row(s), time 0.0530 sec
 
+SQL> alter table vix_p_primary_data add constraint pk_p_primary_data primary key (id_area,start_time,id_value_type)
+-1 row(s), time 0.0469 sec
+
+SQL> alter table vix_s_secondary_data add constraint pk_s_secondary_data primary key (id_area,start_time,id_aggreg_type)
+-1 row(s), time 0.0535 sec
+
+SQL> create unique index indx_vix_c_frequency_class_ome on vix_c_frequency_class_ome (code)
+-1 row(s), time 0.0783 sec
+
+SQL> create unique index indx_vix_c_class_cpp_01 on vix_c_class_cpp (class)
+-1 row(s), time 0.0381 sec
+
+SQL> create unique index indx_vix_c_class_cpp_02 on vix_c_class_cpp (code)
+-1 row(s), time 0.0466 sec
+
+SQL> create unique index indx_vix_c_area_01 on vix_c_area (fixed_id)
+-1 row(s), time 0.0536 sec
+
 SQL> create unique index indx_vix_c_area_02 on vix_c_area (code)
--1 row(s), time 0.0500 sec
+-1 row(s), time 0.0313 sec
 
 SQL> create unique index indx_vix_c_aggreg_type on vix_c_aggreg_type (fixed_id)
--1 row(s), time 0.0570 sec
+-1 row(s), time 0.0533 sec
 
 SQL> create unique index indx_vix_c_value_type on vix_c_value_type (fixed_id)
--1 row(s), time 0.0600 sec
+-1 row(s), time 0.0469 sec
 
 SQL> alter table vix_p_primary_data add constraint fk_p_primary_data_01 foreign key (id_area) references vix_c_area (id)
--1 row(s), time 0.0720 sec
+-1 row(s), time 0.0532 sec
 
 SQL> alter table vix_p_primary_data add constraint fk_p_primary_data_03 foreign key (id_value_type) references vix_c_value_type (id)
--1 row(s), time 0.3410 sec
+-1 row(s), time 0.0472 sec
 
 SQL> alter table vix_s_secondary_data add constraint fk_s_secondary_data_01 foreign key (id_area) references vix_c_area (id)
--1 row(s), time 0.0613 sec
+-1 row(s), time 0.0529 sec
 
-SQL> alter table vix_s_secondary_data add constraint fk_s_secondary_data_03 foreign key (id_aggreg_type) references vix_c_aggreg_type (id)
--1 row(s), time 0.0600 sec
+SQL> alter table vix_s_secondary_data add constraint fk_s_secondary_data_02 foreign key (id_aggreg_type) references vix_c_aggreg_type (id)
+-1 row(s), time 0.0472 sec
+
+SQL> alter table vix_c_aggreg_type add constraint fk_vix_c_aggreg_type_01 foreign key (id_interval) references vix_c_interval (id)
+-1 row(s), time 0.0536 sec
 
 SQL> grant select,insert,update,delete on vix_c_data_record to vix_rw_role
--1 row(s), time 0.0750 sec
+-1 row(s), time 0.0626 sec
 
 SQL> grant select,insert,update,delete on vix_p_primary_data to vix_rw_role
--1 row(s), time 0.0765 sec
+-1 row(s), time 0.0692 sec
 
 SQL> grant select,insert,update,delete on vix_s_secondary_data to vix_rw_role
--1 row(s), time 0.0636 sec
+-1 row(s), time 0.0469 sec
 
 SQL> grant select,insert,update,delete on vix_c_value_type to vix_rw_role
--1 row(s), time 0.0786 sec
+-1 row(s), time 0.0534 sec
 
 SQL> grant select,insert,update,delete on vix_c_aggreg_type to vix_rw_role
--1 row(s), time 0.0685 sec
+-1 row(s), time 0.0625 sec
 
 SQL> grant select,insert,update,delete on vix_c_area to vix_rw_role
--1 row(s), time 0.0850 sec
+-1 row(s), time 0.0535 sec
 
 SQL> grant select,insert,update,delete on vix_c_frequency_class_ome to vix_rw_role
--1 row(s), time 0.0685 sec
+-1 row(s), time 0.0534 sec
 
 SQL> grant select,insert,update,delete on vix_c_class_cpp to vix_rw_role
--1 row(s), time 0.0781 sec
+-1 row(s), time 0.0625 sec
+
+SQL> grant select,insert,update,delete on vix_c_interval to vix_rw_role
+-1 row(s), time 0.3318 sec
 
 SQL> drop sequence vix_id_data_record
--1 row(s), time 0.0378 sec
+-1 row(s), time 0.1068 sec
 
 SQL> create sequence vix_id_data_record minvalue 1 maxvalue 99999999 start with 1 increment by 1 cache 10 cycle
 -1 row(s), time 0.0469 sec
 
 SQL> grant select on vix_id_data_record to vix_rw_role
--1 row(s), time 0.0693 sec
+-1 row(s), time 0.0648 sec
 
 SQL> exit
 
-End time: 2022-02-14 12:06:46 (elapsed: 0:4.204 sec)
+End time: 2022-04-01 13:37:15 (elapsed: 0:4.263 sec)
