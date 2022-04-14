@@ -33,10 +33,10 @@ insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value
 
 
 delete from vix_c_class_cpp;
-insert into vix_c_class_cpp (id,class,code,name,description) values (1,1,'1D'   ,'Dobré RP','x');
-insert into vix_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'Částečně mírně neříznivé RP','x');
-insert into vix_c_class_cpp (id,class,code,name,description) values (3,3,'3MN'  ,'Mírně nepříznivé RP','x');
-insert into vix_c_class_cpp (id,class,code,name,description) values (4,4,'4N'   ,'Nepříznivé RP','x');
+insert into vix_c_class_cpp (id,class,code,name,description) values (1,1,'1D'   ,'Dobré RP','všech 24 hodnot VI nad 3 000 m2.s-1');
+insert into vix_c_class_cpp (id,class,code,name,description) values (2,2,'2CMN' ,'Částečně mírně neříznivé RP','1-23 hodnot VI nad 3 000 m2.s-1');
+insert into vix_c_class_cpp (id,class,code,name,description) values (3,3,'3MN'  ,'Mírně nepříznivé RP','všech 24 hodnot VI menší nebo rovno 3 000 m2.s-1 a současně je maximálně 17 hodnot VI menší nebo rovno 1 100 m2.s-1');
+insert into vix_c_class_cpp (id,class,code,name,description) values (4,4,'4N'   ,'Nepříznivé RP','18-24 hodnot VI menší nebo rovno 1 100 m2.s-1');
 
 
 delete from vix_c_area;

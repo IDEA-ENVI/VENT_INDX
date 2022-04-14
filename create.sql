@@ -1,3 +1,4 @@
+drop table vix_s_secondary_data;
 drop table vix_c_class_cpp;
 drop table vix_c_frequency_class_ome;
 drop table vix_c_interval cascade constraint;
@@ -19,7 +20,6 @@ grant vix_rw_role to novakv with admin option;
 
 --drop index indx_vt_c_area_01;
 drop table vix_p_primary_data;
-drop table vix_s_secondary_data;
 drop table vix_c_value_type;
 drop table vix_c_aggreg_type;
 drop table vix_c_area;
@@ -102,7 +102,8 @@ create table vix_s_secondary_data
    id_area number(8,0) not null ,
    start_time date not null,
    id_aggreg_type number(8,0) not null ,
-   value float not null   
+   value float,
+   id_class_cpp number(8,0)
 )
 ;
 
@@ -135,8 +136,10 @@ alter table vix_p_primary_data add constraint fk_p_primary_data_03  foreign key 
 
 alter table vix_s_secondary_data add constraint fk_s_secondary_data_01  foreign key (id_area) references vix_c_area (id);
 alter table vix_s_secondary_data add constraint fk_s_secondary_data_02  foreign key (id_aggreg_type) references vix_c_aggreg_type (id);
+alter table vix_s_secondary_data add constraint fk_s_secondary_data_03  foreign key (id_class_cpp) references vix_c_class_cpp (id);
 
 alter table vix_c_aggreg_type add constraint fk_vix_c_aggreg_type_01  foreign key (id_interval) references vix_c_interval (id);
+
 
 
 grant select,insert,update,delete on vix_c_data_record to vix_rw_role;

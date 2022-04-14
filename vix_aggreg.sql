@@ -225,7 +225,7 @@ begin
                      w_id_aggreg_type_cpp_value := 4;
                   end if;
                end if;
-               insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+               insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,id_class_cpp)
                values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_cpp,w_id_aggreg_type_cpp_value);
                commit;
 

@@ -1,9 +1,9 @@
 
-SQL*Plus: Release 12.1.0.2.0 Production on Fri Apr 1 13:40:23 2022
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Apr 14 07:57:27 2022
 
 Copyright (c) 1982, 2014, Oracle.  All rights reserved.
 
-Last Successful login time: Fri Apr 01 2022 13:39:44 +02:00
+Last Successful login time: Thu Apr 14 2022 07:55:56 +02:00
 
 Connected to:
 Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
@@ -240,7 +240,7 @@ SQL> create or replace procedure vix_aggreg (year in number)
 222  			  w_id_aggreg_type_cpp_value := 4;
 223  		       end if;
 224  		    end if;
-225  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+225  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,id_class_cpp)
 226  		    values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_cpp,w_id_aggreg_type_cpp_value);
 227  		    commit;
 228  
@@ -383,7 +383,7 @@ SQL> select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
 
 TO_CHAR(CURRENT_DAT
 -------------------
-2022-04-01 13:40:25
+2022-04-14 07:57:30
 
 SQL> 
 SQL> execute vix_aggreg(1);
@@ -395,7 +395,7 @@ SQL> select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
 
 TO_CHAR(CURRENT_DAT
 -------------------
-2022-04-01 13:40:27
+2022-04-14 07:57:32
 
 SQL> 
 SQL> exit;
