@@ -26,6 +26,11 @@ insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) 
 
 insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (13,13,1,'CPP','Den: Třída rozptylových podmínek 1 až 4.','Čtyři třídy rozptylových podmínek charakterizované čísly 1 až 4.') ;
 
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (14,14,1,'kv50/1d','Den: Medián za den','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (15,15,2,'kv50/1m','Den: Medián za měsíc','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (16,16,3,'kv50/1y','Den: Medián za rok','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport') ;
+
+
 delete from vix_c_frequency_class_ome;
 insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (1,'D' ,'Dobré RP','četnost hodinových hodnot v %'           ,3000,null);
 insert into vix_c_frequency_class_ome (id,code,name,description,value_from,value_to) values (2,'MN','Mírně nepříznivé RP','četnost hodinových hodnot v %',1100,3000);

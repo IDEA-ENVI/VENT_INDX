@@ -1,0 +1,24 @@
+OraQ: Release 1.0.7011.24225 - Production on 10/24/2022 14:11:34
+Copyright (c) 2019 IDEA-ENVIs.r.o. - All rights reserved.
+
+Connection Code: PHA_VIX
+         Server: pr-t5cluster-scan.chmi.cz
+   Service Name: CAQR.chmi.cz
+        User Id: vix
+ Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP, Advanced Analytics and Real Application Testing options
+Connection time: 1.651 sec.
+
+Start time: 2022-10-24 14:11:34
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (14,14,1,'kv50/1d','Den: Medián za den','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
+1 row(s), time 0.0715 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (15,15,2,'kv50/1m','Den: Medián za měsíc','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
+1 row(s), time 0.0248 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (16,16,3,'kv50/1y','Den: Medián za rok','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
+1 row(s), time 0.0248 sec
+
+SQL> exit
+
+End time: 2022-10-24 14:11:36 (elapsed: 0:0.126 sec)
