@@ -169,104 +169,105 @@ begin
                and start_time< w_running_time + 1
                and id_value_type=w_id_value_type_data
                and value is not null;
-               -- median za den
-               for rec_tab2 in (
-                  select value
+               if w_count > 0 then
+                  -- median za den
+                  for rec_tab2 in (
+                     select value
+                     from vix.vix_p_primary_data
+                     where id_area=rec_tab1.id_area
+                     and start_time>=w_running_time
+                     and start_time< w_running_time + 1
+                     and id_value_type=w_id_value_type_data
+                     and value is not null
+                     order by value desc)
+                  loop
+                     i := i + 1;
+                     if i = w_count/2 then
+                        w_value_kv := rec_tab2.value;
+                     end if;
+                  end loop;
+                  if w_count > w_min_values_1d then
+                     i := 0;
+                     insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+                     values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_avg_1d,w_value);
+                  
+                     insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+                     values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_kv50_1d,w_value_kv);
+                     w_value_kv := null;
+                  end if;
+                  -- rozdeleni cetnosti podle OME - denni
+                  select count(value) into w_count_1
                   from vix.vix_p_primary_data
                   where id_area=rec_tab1.id_area
                   and start_time>=w_running_time
                   and start_time< w_running_time + 1
                   and id_value_type=w_id_value_type_data
-                  and value is not null
-                  order by value desc)
-               loop
-                  i := i + 1;
-                  if i = w_count/2 then
-                     w_value_kv := rec_tab2.value;
-                  end if;
-               end loop;
-               if w_count > w_min_values_1d then
-                  i := 0;
-                  insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-                  values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_avg_1d,w_value);
-
-                  insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-                  values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_kv50_1d,w_value_kv);
-                  w_value_kv := null;
-               end if;
-               -- rozdeleni cetnosti podle OME - denni
-               select count(value) into w_count_1
-               from vix.vix_p_primary_data
-               where id_area=rec_tab1.id_area
-               and start_time>=w_running_time
-               and start_time< w_running_time + 1
-               and id_value_type=w_id_value_type_data
-               and value > 3000;
-
-               select count(value) into w_count_2
-               from vix.vix_p_primary_data
-               where id_area=rec_tab1.id_area
-               and start_time>=w_running_time
-               and start_time< w_running_time + 1
-               and id_value_type=w_id_value_type_data
-               and value > 1100 and value <= 3000;
-
-               select count(value) into w_count_3
-               from vix.vix_p_primary_data
-               where id_area=rec_tab1.id_area
-               and start_time>=w_running_time
-               and start_time< w_running_time + 1
-               and id_value_type=w_id_value_type_data
-               and value < 1100;
-
-               insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-               values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d1,100*w_count_1/w_count);
-
-               insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-               values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d2,100*w_count_2/w_count);
-
-               insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-               values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d3,100*w_count_3/w_count);
-               commit;
-               -- rozdeleni cetnosti podle CPP/RPP - denni
-               select count(value) into w_count_1
-               from vix.vix_p_primary_data
-               where id_area=rec_tab1.id_area
-               and start_time>=w_running_time
-               and start_time< w_running_time + 1
-               and id_value_type=w_id_value_type_data
-               and value > 3000;
-
-               if w_count_1 = 24 then
-                  w_id_aggreg_type_cpp_value := 1;
-               elsif w_count_1 >= 1 and w_count_1 <= 23  then
-                  w_id_aggreg_type_cpp_value := 2;
-               else
+                  and value > 3000;
+                  
                   select count(value) into w_count_2
                   from vix.vix_p_primary_data
                   where id_area=rec_tab1.id_area
                   and start_time>=w_running_time
                   and start_time< w_running_time + 1
                   and id_value_type=w_id_value_type_data
-                  and value <= 3000;
-
+                  and value > 1100 and value <= 3000;
+                  
                   select count(value) into w_count_3
                   from vix.vix_p_primary_data
                   where id_area=rec_tab1.id_area
                   and start_time>=w_running_time
                   and start_time< w_running_time + 1
                   and id_value_type=w_id_value_type_data
-                  and value <= 1100;
-                  if w_count_2 = 24 and w_count_3 <= 17 then
-                     w_id_aggreg_type_cpp_value := 3;
+                  and value < 1100;
+                  
+                  insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+                  values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d1,100*w_count_1/w_count);
+                  
+                  insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+                  values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d2,100*w_count_2/w_count);
+                  
+                  insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
+                  values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d3,100*w_count_3/w_count);
+                  commit;
+                  -- rozdeleni cetnosti podle CPP/RPP - denni
+                  select count(value) into w_count_1
+                  from vix.vix_p_primary_data
+                  where id_area=rec_tab1.id_area
+                  and start_time>=w_running_time
+                  and start_time< w_running_time + 1
+                  and id_value_type=w_id_value_type_data
+                  and value > 3000;
+                  
+                  if w_count_1 = 24 then
+                     w_id_aggreg_type_cpp_value := 1;
+                  elsif w_count_1 >= 1 and w_count_1 <= 23  then
+                     w_id_aggreg_type_cpp_value := 2;
                   else
-                     w_id_aggreg_type_cpp_value := 4;
+                     select count(value) into w_count_2
+                     from vix.vix_p_primary_data
+                     where id_area=rec_tab1.id_area
+                     and start_time>=w_running_time
+                     and start_time< w_running_time + 1
+                     and id_value_type=w_id_value_type_data
+                     and value <= 3000;
+                  
+                     select count(value) into w_count_3
+                     from vix.vix_p_primary_data
+                     where id_area=rec_tab1.id_area
+                     and start_time>=w_running_time
+                     and start_time< w_running_time + 1
+                     and id_value_type=w_id_value_type_data
+                     and value <= 1100;
+                     if w_count_2 = 24 and w_count_3 <= 17 then
+                        w_id_aggreg_type_cpp_value := 3;
+                     else
+                        w_id_aggreg_type_cpp_value := 4;
+                     end if;
                   end if;
+                  insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,id_class_cpp)
+                  values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_cpp,w_id_aggreg_type_cpp_value);
+                  commit;
                end if;
-               insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,id_class_cpp)
-               values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_cpp,w_id_aggreg_type_cpp_value);
-               commit;
-
                w_running_time := w_running_time + 1; -- pricteni jednoho dne
             end loop;
             i := 0;
