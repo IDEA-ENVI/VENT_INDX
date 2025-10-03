@@ -1,0 +1,79 @@
+OraQ: Release 1.0.8818.25436 - Production on 10/03/2025 10:09:16
+Copyright (c) 2019-2024 IDEA-ENVIs.r.o. - All rights reserved.
+
+Connection Code: PHA_VIX
+         Server: pr-t5cluster-scan.chmi.cz
+   Service Name: CAQR.chmi.cz
+        User Id: vix
+ Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP, Advanced Analytics and Real Application Testing options
+        Unicode: True
+Connection time: 0.697 sec.
+
+Start time: 2025-10-03 10:09:16
+
+SQL> delete from vix_c_aggreg_type
+0 row(s), time 0.1011 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (1 ,1 ,1,'avg(1h)/1d','Den: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
+1 row(s), time 0.0769 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (2 ,2 ,2,'avg(1h)/1m','Měsíc: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
+1 row(s), time 0.0240 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (3 ,3 ,3,'avg(1h)/1y','Rok: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport')
+1 row(s), time 0.0252 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (4 ,4 ,1,'%/1d VD','Den: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0370 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (5 ,5 ,1,'%/1d D' ,'Den: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0243 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (6 ,6 ,1,'%/1d MN','Den: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0242 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (7 ,7 ,1,'%/1d N' ,'Den: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0254 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (8 ,8 ,2,'%/1m VD','Měsíc: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0242 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (9 ,9 ,2,'%/1m D' ,'Měsíc: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0242 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (10,10,2,'%/1m MN','Měsíc: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0252 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (11,11,2,'%/1m N' ,'Měsíc: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0245 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (12,12,3,'%/1y VD','Rok: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.2488 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (13,13,3,'%/1y D' ,'Rok: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0250 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (14,14,3,'%/1y MN','Rok: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0247 sec
+
+SQL> insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description) values (15,15,3,'%/1y N' ,'Rok: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat')
+1 row(s), time 0.0244 sec
+
+SQL> delete from vix_c_class
+0 row(s), time 0.0429 sec
+
+SQL> insert into vix_c_class (id,class,code,name,description,value_from,value_to) values (1,1,'VD','Velmi dobré RP','četnost hodinových hodnot v %' ,8600,null)
+1 row(s), time 0.0853 sec
+
+SQL> insert into vix_c_class (id,class,code,name,description,value_from,value_to) values (2,2,'D' ,'Dobré RP','četnost hodinových hodnot v %' ,2800,8600)
+1 row(s), time 0.0233 sec
+
+SQL> insert into vix_c_class (id,class,code,name,description,value_from,value_to) values (3,3,'MN','Mírně nepříznivé RP','četnost hodinových hodnot v %',1700,2800)
+1 row(s), time 0.0311 sec
+
+SQL> insert into vix_c_class (id,class,code,name,description,value_from,value_to) values (4,4,'N' ,'Nepříznivé RP','četnost hodinových hodnot v %' ,0,1700)
+1 row(s), time 0.0236 sec
+
+SQL> exit
+
+End time: 2025-10-03 10:09:17 (elapsed: 0:0.969 sec)
