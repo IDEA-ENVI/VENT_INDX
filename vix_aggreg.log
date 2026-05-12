@@ -1,9 +1,9 @@
 
-SQL*Plus: Release 12.1.0.2.0 Production on Wed Jan 21 14:01:54 2026
+SQL*Plus: Release 12.1.0.2.0 Production on Thu May 7 10:02:41 2026
 
 Copyright (c) 1982, 2014, Oracle.  All rights reserved.
 
-Last Successful login time: Wed Jan 21 2026 14:01:53 +01:00
+Last Successful login time: Thu May 07 2026 10:02:27 +02:00
 
 Connected to:
 Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
@@ -89,232 +89,253 @@ SQL> create or replace procedure vix_aggreg (year in number)
  76  	      -- Pri nahravani zatim nevytvarime data_record, tak si ho vytvorime zde z primarnich dat po mesicich.
  77  	      delete from vix.vix_c_data_record;
  78  
- 79  	      insert into vix.vix_c_data_record (id,id_area,start_time,end_time)
- 80  	      select vix.vix_id_data_record.nextval,id_area,start_time,end_time from (
- 81  	      select distinct id_area,trunc(start_time,'month') as start_time ,add_months(trunc(start_time,'month'),1) as end_time
+ 79  	      insert into vix.vix_c_data_record (id,id_area,id_component,start_time,end_time)
+ 80  	      select vix.vix_id_data_record.nextval,id_area,id_component,start_time,end_time from (
+ 81  	      select distinct id_area,id_component,trunc(start_time,'month') as start_time ,add_months(trunc(start_time,'month'),1) as end_time
  82  	      from vix.vix_p_primary_data
- 83  	      order by id_area,trunc(start_time,'month'));
+ 83  	      order by id_area,id_component,trunc(start_time,'month'));
  84  
  85  	      for rec_tab0 in (
- 86  		 select id,id_area,start_time,end_time
+ 86  		 select id,id_area,id_component,start_time,end_time
  87  		 from vix.vix_c_data_record
  88  		 order by id
  89  		 )
  90  	      loop
  91  		 delete from vix.vix_s_secondary_data
  92  		 where id_area=rec_tab0.id_area
- 93  		 and start_time>=rec_tab0.start_time
- 94  		 and start_time< rec_tab0.end_time;
- 95  		 commit;
- 96  	      end loop;
- 97  	      -- Cyklus pres vix.vix_c_data_record
- 98  	      for rec_tab1 in (
- 99  		 select id,id_area,start_time,end_time
-100  		 from vix.vix_c_data_record
-101  		 order by id
-102  		 )
-103  	      loop
-104  		 w_running_time := rec_tab1.start_time;
-105  		 w_start_time := rec_tab1.start_time;
-106  		 w_end_time := rec_tab1.end_time;
-107  		 while (w_running_time < w_end_time) loop -- cyklus po hodine
-108  		    -- denni prumery
-109  		    select avg(value),count(value) into w_value,w_count
-110  		    from vix.vix_p_primary_data
-111  		    where id_area=rec_tab1.id_area
-112  		    and start_time>=w_running_time
-113  		    and start_time< w_running_time + 1
-114  		    and id_value_type=w_id_value_type_data
-115  		    and value is not null;
-116  		    -- rozdeleni cetnosti podle OME - denni
-117  		    if w_count >= w_min_values_1d then
-118  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-119  		       values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_avg_1d,w_value);
-120  
-121  		       select count(value) into w_count_1
-122  		       from vix.vix_p_primary_data
-123  		       where id_area=rec_tab1.id_area
-124  		       and start_time>=w_running_time
-125  		       and start_time< w_running_time + 1
-126  		       and id_value_type=w_id_value_type_data
-127  		       and value > class_limit_1;
-128  
-129  		       select count(value) into w_count_2
-130  		       from vix.vix_p_primary_data
-131  		       where id_area=rec_tab1.id_area
-132  		       and start_time>=w_running_time
-133  		       and start_time< w_running_time + 1
-134  		       and id_value_type=w_id_value_type_data
-135  		       and value > class_limit_2 and value <= class_limit_1;
-136  
-137  		       select count(value) into w_count_3
-138  		       from vix.vix_p_primary_data
-139  		       where id_area=rec_tab1.id_area
-140  		       and start_time>=w_running_time
-141  		       and start_time< w_running_time + 1
-142  		       and id_value_type=w_id_value_type_data
-143  		       and value > class_limit_3 and value <= class_limit_2;
-144  
-145  		       select count(value) into w_count_4
-146  		       from vix.vix_p_primary_data
-147  		       where id_area=rec_tab1.id_area
-148  		       and start_time>=w_running_time
-149  		       and start_time< w_running_time + 1
-150  		       and id_value_type=w_id_value_type_data
-151  		       and value <= class_limit_3;
-152  
-153  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-154  		       values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d1,100*w_count_1/w_count);
-155  
-156  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-157  		       values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d2,100*w_count_2/w_count);
+ 93  		 and id_component=rec_tab0.id_component
+ 94  		 and start_time>=rec_tab0.start_time
+ 95  		 and start_time< rec_tab0.end_time;
+ 96  		 commit;
+ 97  	      end loop;
+ 98  	      -- Cyklus pres vix.vix_c_data_record
+ 99  	      for rec_tab1 in (
+100  		 select id,id_area,id_component,start_time,end_time
+101  		 from vix.vix_c_data_record
+102  		 order by id
+103  		 )
+104  	      loop
+105  		 w_running_time := rec_tab1.start_time;
+106  		 w_start_time := rec_tab1.start_time;
+107  		 w_end_time := rec_tab1.end_time;
+108  		 while (w_running_time < w_end_time) loop -- cyklus po hodine
+109  		    -- denni prumery
+110  		    select avg(value),count(value) into w_value,w_count
+111  		    from vix.vix_p_primary_data
+112  		    where id_area=rec_tab1.id_area
+113  		    and id_component=rec_tab1.id_component
+114  		    and start_time>=w_running_time
+115  		    and start_time< w_running_time + 1
+116  		    and id_value_type=w_id_value_type_data
+117  		    and value is not null;
+118  		    -- rozdeleni cetnosti podle OME - denni
+119  		    if w_count >= w_min_values_1d then
+120  		       insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+121  		       values (rec_tab1.id_area,rec_tab1.id_component,w_running_time,w_id_aggreg_type_avg_1d,w_value);
+122  		       if rec_tab1.id_component=1 then -- rozdeleni do trid pocitame pouze pro ventilacni index
+123  			  select count(value) into w_count_1
+124  			  from vix.vix_p_primary_data
+125  			  where id_area=rec_tab1.id_area
+126  			  and id_component=rec_tab1.id_component
+127  			  and start_time>=w_running_time
+128  			  and start_time< w_running_time + 1
+129  			  and id_value_type=w_id_value_type_data
+130  			  and value > class_limit_1;
+131  
+132  			  select count(value) into w_count_2
+133  			  from vix.vix_p_primary_data
+134  			  where id_area=rec_tab1.id_area
+135  			  and id_component=rec_tab1.id_component
+136  			  and start_time>=w_running_time
+137  			  and start_time< w_running_time + 1
+138  			  and id_value_type=w_id_value_type_data
+139  			  and value > class_limit_2 and value <= class_limit_1;
+140  
+141  			  select count(value) into w_count_3
+142  			  from vix.vix_p_primary_data
+143  			  where id_area=rec_tab1.id_area
+144  			  and id_component=rec_tab1.id_component
+145  			  and start_time>=w_running_time
+146  			  and start_time< w_running_time + 1
+147  			  and id_value_type=w_id_value_type_data
+148  			  and value > class_limit_3 and value <= class_limit_2;
+149  
+150  			  select count(value) into w_count_4
+151  			  from vix.vix_p_primary_data
+152  			  where id_area=rec_tab1.id_area
+153  			  and id_component=rec_tab1.id_component
+154  			  and start_time>=w_running_time
+155  			  and start_time< w_running_time + 1
+156  			  and id_value_type=w_id_value_type_data
+157  			  and value <= class_limit_3;
 158  
-159  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-160  		       values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d3,100*w_count_3/w_count);
+159  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+160  			  values (rec_tab1.id_area,rec_tab1.id_component,w_running_time,w_id_aggreg_type_ome_d1,100*w_count_1/w_count);
 161  
-162  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-163  		       values (rec_tab1.id_area,w_running_time,w_id_aggreg_type_ome_d4,100*w_count_4/w_count);
-164  		       commit;
-165  		    end if;
-166  		    w_running_time := w_running_time + 1; -- pricteni jednoho dne
-167  		 end loop;
-168  		 for rec_tab2 in (
-169  		    select avg(value) as value,count(*) as count
-170  		    from vix.vix_p_primary_data
-171  		    where id_area=rec_tab1.id_area
-172  		    and start_time>=rec_tab1.start_time
-173  		    and start_time< rec_tab1.end_time
-174  		    and id_value_type=w_id_value_type_data
-175  		    and value is not null
-176  		    )
-177  		 loop
-178  		    w_min_values_1m := get_min_values(rec_tab1.start_time,'MM');
-179  		    w_count := rec_tab2.count;
-180  		    -- mesicni prumery
-181  		    if w_count >= w_min_values_1m then
-182  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-183  		       values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_avg_1m,rec_tab2.value);
-184  		       -- rozdeleni cetnosti podle OME - mesicni
-185  		       select count(value) into w_count_1
-186  		       from vix.vix_p_primary_data
-187  		       where id_area=rec_tab1.id_area
-188  		       and start_time>=w_start_time
-189  		       and start_time< w_end_time
-190  		       and id_value_type=w_id_value_type_data
-191  		       and value > class_limit_1;
-192  
-193  		       select count(value) into w_count_2
-194  		       from vix.vix_p_primary_data
-195  		       where id_area=rec_tab1.id_area
-196  		       and start_time>=w_start_time
-197  		       and start_time< w_end_time
-198  		       and id_value_type=w_id_value_type_data
-199  		       and value > class_limit_2 and value <= class_limit_1;
-200  
-201  		       select count(value) into w_count_3
-202  		       from vix.vix_p_primary_data
-203  		       where id_area=rec_tab1.id_area
-204  		       and start_time>=w_start_time
-205  		       and start_time< w_end_time
-206  		       and id_value_type=w_id_value_type_data
-207  		       and value > class_limit_3 and value <= class_limit_2;
-208  
-209  		       select count(value) into w_count_4
-210  		       from vix.vix_p_primary_data
-211  		       where id_area=rec_tab1.id_area
-212  		       and start_time>=w_start_time
-213  		       and start_time< w_end_time
-214  		       and id_value_type=w_id_value_type_data
-215  		       and value < class_limit_3;
-216  
-217  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-218  		       values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m1,100*w_count_1/w_count);
-219  
-220  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-221  		       values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m2,100*w_count_2/w_count);
-222  
-223  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-224  		       values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m3,100*w_count_3/w_count);
-225  
-226  		       insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-227  		       values (rec_tab1.id_area,rec_tab1.start_time,w_id_aggreg_type_ome_m4,100*w_count_4/w_count);
-228  		    end if;
-229  		    commit;
-230  		 end loop;
-231  	      end loop;
+162  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+163  			  values (rec_tab1.id_area,rec_tab1.id_component,w_running_time,w_id_aggreg_type_ome_d2,100*w_count_2/w_count);
+164  
+165  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+166  			  values (rec_tab1.id_area,rec_tab1.id_component,w_running_time,w_id_aggreg_type_ome_d3,100*w_count_3/w_count);
+167  
+168  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+169  			  values (rec_tab1.id_area,rec_tab1.id_component,w_running_time,w_id_aggreg_type_ome_d4,100*w_count_4/w_count);
+170  		       end if;
+171  		       commit;
+172  		    end if;
+173  		    w_running_time := w_running_time + 1; -- pricteni jednoho dne
+174  		 end loop;
+175  		 for rec_tab2 in (
+176  		    select avg(value) as value,count(*) as count
+177  		    from vix.vix_p_primary_data
+178  		    where id_area=rec_tab1.id_area
+179  		    and id_component=rec_tab1.id_component
+180  		    and start_time>=rec_tab1.start_time
+181  		    and start_time< rec_tab1.end_time
+182  		    and id_value_type=w_id_value_type_data
+183  		    and value is not null
+184  		    )
+185  		 loop
+186  		    w_min_values_1m := get_min_values(rec_tab1.start_time,'MM');
+187  		    w_count := rec_tab2.count;
+188  		    -- mesicni prumery
+189  		    if w_count >= w_min_values_1m then
+190  		       insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+191  		       values (rec_tab1.id_area,rec_tab1.id_component,rec_tab1.start_time,w_id_aggreg_type_avg_1m,rec_tab2.value);
+192  		       -- rozdeleni cetnosti podle OME - mesicni
+193  		       if rec_tab1.id_component=1 then -- rozdeleni do trid pocitame pouze pro ventilacni index
+194  			  select count(value) into w_count_1
+195  			  from vix.vix_p_primary_data
+196  			  where id_area=rec_tab1.id_area
+197  			  and id_component=rec_tab1.id_component
+198  			  and start_time>=w_start_time
+199  			  and start_time< w_end_time
+200  			  and id_value_type=w_id_value_type_data
+201  			  and value > class_limit_1;
+202  
+203  			  select count(value) into w_count_2
+204  			  from vix.vix_p_primary_data
+205  			  where id_area=rec_tab1.id_area
+206  			  and id_component=rec_tab1.id_component
+207  			  and start_time>=w_start_time
+208  			  and start_time< w_end_time
+209  			  and id_value_type=w_id_value_type_data
+210  			  and value > class_limit_2 and value <= class_limit_1;
+211  
+212  			  select count(value) into w_count_3
+213  			  from vix.vix_p_primary_data
+214  			  where id_area=rec_tab1.id_area
+215  			  and id_component=rec_tab1.id_component
+216  			  and start_time>=w_start_time
+217  			  and start_time< w_end_time
+218  			  and id_value_type=w_id_value_type_data
+219  			  and value > class_limit_3 and value <= class_limit_2;
+220  
+221  			  select count(value) into w_count_4
+222  			  from vix.vix_p_primary_data
+223  			  where id_area=rec_tab1.id_area
+224  			  and id_component=rec_tab1.id_component
+225  			  and start_time>=w_start_time
+226  			  and start_time< w_end_time
+227  			  and id_value_type=w_id_value_type_data
+228  			  and value < class_limit_3;
+229  
+230  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+231  			  values (rec_tab1.id_area,rec_tab1.id_component,rec_tab1.start_time,w_id_aggreg_type_ome_m1,100*w_count_1/w_count);
 232  
-233  	      -- rocni prumery
-234  	      for rec_tab3 in (
-235  		 select distinct id_area,trunc(start_time,'year') as start_time,add_months(trunc(start_time,'year'),12) as end_time
-236  		 from vix.vix_c_data_record
-237  		 order by id_area
-238  		 )
-239  	      loop
-240  		 w_start_time := rec_tab3.start_time;
-241  		 w_end_time   := rec_tab3.end_time;
-242  		 w_min_values_1y := get_min_values(w_start_time,'YYYY');
-243  		 select avg(value),count(*) into w_value,w_count
-244  		 from vix.vix_p_primary_data
-245  		 where id_area=rec_tab3.id_area
-246  		 and start_time>=rec_tab3.start_time
-247  		 and start_time< rec_tab3.end_time
-248  		 and id_value_type=w_id_value_type_data
-249  		 and value is not null;
-250  		 if w_count >= w_min_values_1y then
-251  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-252  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_avg_1y,w_value);
-253  		    commit;
-254  		    -- rozdeleni cetnosti podle OME - rocni
-255  		    select count(value) into w_count_1
-256  		    from vix.vix_p_primary_data
-257  		    where id_area=rec_tab3.id_area
-258  		    and start_time>=w_start_time
-259  		    and start_time< w_end_time
-260  		    and id_value_type=w_id_value_type_data
-261  		    and value > class_limit_1;
-262  
-263  		    select count(value) into w_count_2
-264  		    from vix.vix_p_primary_data
-265  		    where id_area=rec_tab3.id_area
-266  		    and start_time>=w_start_time
-267  		    and start_time< w_end_time
-268  		    and id_value_type=w_id_value_type_data
-269  		    and value > class_limit_2 and value <= class_limit_1;
-270  
-271  		    select count(value) into w_count_3
-272  		    from vix.vix_p_primary_data
-273  		    where id_area=rec_tab3.id_area
-274  		    and start_time>=w_start_time
-275  		    and start_time< w_end_time
-276  		    and id_value_type=w_id_value_type_data
-277  		    and value > class_limit_3 and value <= class_limit_2;
-278  
-279  		    select count(value) into w_count_4
-280  		    from vix.vix_p_primary_data
-281  		    where id_area=rec_tab3.id_area
-282  		    and start_time>=w_start_time
-283  		    and start_time< w_end_time
-284  		    and id_value_type=w_id_value_type_data
-285  		    and value < class_limit_3;
-286  
-287  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-288  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y1,100*w_count_1/w_count);
-289  
-290  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-291  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y2,100*w_count_2/w_count);
-292  
-293  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-294  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y3,100*w_count_3/w_count);
-295  
-296  		    insert into vix.vix_s_secondary_data (id_area,start_time,id_aggreg_type,value)
-297  		    values (rec_tab3.id_area,rec_tab3.start_time,w_id_aggreg_type_ome_y4,100*w_count_4/w_count);
-298  		 end if;
-299  		 commit;
-300  	      end loop;
-301  -- 	delete from vix.vix_c_data_record;
-302  	   end;
-303  end vix_aggreg;
-304  /
+233  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+234  			  values (rec_tab1.id_area,rec_tab1.id_component,rec_tab1.start_time,w_id_aggreg_type_ome_m2,100*w_count_2/w_count);
+235  
+236  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+237  			  values (rec_tab1.id_area,rec_tab1.id_component,rec_tab1.start_time,w_id_aggreg_type_ome_m3,100*w_count_3/w_count);
+238  
+239  			  insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+240  			  values (rec_tab1.id_area,rec_tab1.id_component,rec_tab1.start_time,w_id_aggreg_type_ome_m4,100*w_count_4/w_count);
+241  		       end if;
+242  		    end if;
+243  		    commit;
+244  		 end loop;
+245  	      end loop;
+246  
+247  	      -- rocni prumery
+248  	      for rec_tab3 in (
+249  		 select distinct id_area,id_component,trunc(start_time,'year') as start_time,add_months(trunc(start_time,'year'),12) as end_time
+250  		 from vix.vix_c_data_record
+251  		 order by id_area
+252  		 )
+253  	      loop
+254  		 w_start_time := rec_tab3.start_time;
+255  		 w_end_time   := rec_tab3.end_time;
+256  		 w_min_values_1y := get_min_values(w_start_time,'YYYY');
+257  		 select avg(value),count(*) into w_value,w_count
+258  		 from vix.vix_p_primary_data
+259  		 where id_area=rec_tab3.id_area
+260  		 and id_component=rec_tab3.id_component
+261  		 and start_time>=rec_tab3.start_time
+262  		 and start_time< rec_tab3.end_time
+263  		 and id_value_type=w_id_value_type_data
+264  		 and value is not null;
+265  		 if w_count >= w_min_values_1y then
+266  		    insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+267  		    values (rec_tab3.id_area,rec_tab3.id_component,rec_tab3.start_time,w_id_aggreg_type_avg_1y,w_value);
+268  		    commit;
+269  		    -- rozdeleni cetnosti podle OME - rocni
+270  		    if rec_tab3.id_component=1 then -- rozdeleni do trid pocitame pouze pro ventilacni index
+271  		       select count(value) into w_count_1
+272  		       from vix.vix_p_primary_data
+273  		       where id_area=rec_tab3.id_area
+274  		       and id_component=rec_tab3.id_component
+275  		       and start_time>=w_start_time
+276  		       and start_time< w_end_time
+277  		       and id_value_type=w_id_value_type_data
+278  		       and value > class_limit_1;
+279  
+280  		       select count(value) into w_count_2
+281  		       from vix.vix_p_primary_data
+282  		       where id_area=rec_tab3.id_area
+283  		       and id_component=rec_tab3.id_component
+284  		       and start_time>=w_start_time
+285  		       and start_time< w_end_time
+286  		       and id_value_type=w_id_value_type_data
+287  		       and value > class_limit_2 and value <= class_limit_1;
+288  
+289  		       select count(value) into w_count_3
+290  		       from vix.vix_p_primary_data
+291  		       where id_area=rec_tab3.id_area
+292  		       and id_component=rec_tab3.id_component
+293  		       and start_time>=w_start_time
+294  		       and start_time< w_end_time
+295  		       and id_value_type=w_id_value_type_data
+296  		       and value > class_limit_3 and value <= class_limit_2;
+297  
+298  		       select count(value) into w_count_4
+299  		       from vix.vix_p_primary_data
+300  		       where id_area=rec_tab3.id_area
+301  		       and id_component=rec_tab3.id_component
+302  		       and start_time>=w_start_time
+303  		       and start_time< w_end_time
+304  		       and id_value_type=w_id_value_type_data
+305  		       and value < class_limit_3;
+306  
+307  		       insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+308  		       values (rec_tab3.id_area,rec_tab3.id_component,rec_tab3.start_time,w_id_aggreg_type_ome_y1,100*w_count_1/w_count);
+309  
+310  		       insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+311  		       values (rec_tab3.id_area,rec_tab3.id_component,rec_tab3.start_time,w_id_aggreg_type_ome_y2,100*w_count_2/w_count);
+312  
+313  		       insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+314  		       values (rec_tab3.id_area,rec_tab3.id_component,rec_tab3.start_time,w_id_aggreg_type_ome_y3,100*w_count_3/w_count);
+315  
+316  		       insert into vix.vix_s_secondary_data (id_area,id_component,start_time,id_aggreg_type,value)
+317  		       values (rec_tab3.id_area,rec_tab3.id_component,rec_tab3.start_time,w_id_aggreg_type_ome_y4,100*w_count_4/w_count);
+318  		    end if;
+319  		 end if;
+320  		 commit;
+321  	      end loop;
+322  -- 	delete from vix.vix_c_data_record;
+323  	   end;
+324  end vix_aggreg;
+325  /
 
 Procedure created.
 
@@ -334,10 +355,18 @@ SQL> select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
 
 TO_CHAR(CURRENT_DAT
 -------------------
-2026-01-21 14:01:58
+2026-05-07 10:02:48
 
-SQL> --execute vix_aggreg(1);
-SQL> --select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
+SQL> execute vix_aggreg(1);
+
+PL/SQL procedure successfully completed.
+
+SQL> select to_char(current_date,'yyyy-mm-dd hh24:mi:ss') from dual;
+
+TO_CHAR(CURRENT_DAT
+-------------------
+2026-05-07 10:08:21
+
 SQL> exit;
 Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
 With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,

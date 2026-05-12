@@ -1,0 +1,34 @@
+
+SQL*Plus: Release 12.1.0.2.0 Production on Mon May 4 13:43:54 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Last Successful login time: Mon May 04 2026 12:47:40 +02:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> alter table VIX_P_PRIMARY_DATA drop constraint PK_P_PRIMARY_DATA;
+
+Table altered.
+
+SQL> alter table VIX_P_PRIMARY_DATA add constraint PK_P_PRIMARY_DATA primary key (ID_AREA, ID_COMPONENT, START_TIME, ID_VALUE_TYPE);
+
+Table altered.
+
+SQL> 
+SQL> alter table VIX_S_SECONDARY_DATA drop constraint PK_S_SECONDARY_DATA;
+
+Table altered.
+
+SQL> alter table VIX_S_SECONDARY_DATA add constraint PK_S_SECONDARY_DATA primary key (ID_AREA, ID_COMPONENT, START_TIME, ID_AGGREG_TYPE);
+
+Table altered.
+
+SQL> 
+SQL> exit;
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
