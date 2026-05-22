@@ -17,7 +17,8 @@ create table vix_c_aggreg_type
    abbrev varchar2(20) not null,
    name nvarchar2(80) not null,
    description  nvarchar2(1600) not null,
-   unit nvarchar2(50) not null
+   unit nvarchar2(50) not null,
+   column_name varchar2(30 CHAR) not null
 );
 alter table vix_c_aggreg_type          add constraint pk_c_aggreg_type         primary key (id) ;
 create unique index indx_vix_c_aggreg_type          on vix_c_aggreg_type (fixed_id);
@@ -135,28 +136,28 @@ insert into vix_c_component (file_prefix,abbrev,name,unit) values ('VI','VI','Ve
 insert into vix_c_component (file_prefix,abbrev,name,unit) values ('T','T2m','Teplota vzduchu','K');
 
 delete from vix_c_aggreg_type;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (1 ,1 ,1,'avg(1h)/1d','Den: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','m²·s⁻¹') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (2 ,2 ,2,'avg(1h)/1m','Měsíc: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','m²·s⁻¹') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (3 ,3 ,3,'avg(1h)/1y','Rok: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','m²·s⁻¹') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (1 ,1 ,1,'avg(1h)/1d','Den: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','m²·s⁻¹','VI_průměr_m²·s⁻¹') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (2 ,2 ,2,'avg(1h)/1m','Měsíc: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','m²·s⁻¹','VI_průměr_m²·s⁻¹') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (3 ,3 ,3,'avg(1h)/1y','Rok: aritmetický průměr ventilačních indexů','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','m²·s⁻¹','VI_průměr_m²·s⁻¹') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (4 ,4 ,1,'%/1d VD','Den: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (5 ,5 ,1,'%/1d D' ,'Den: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (6 ,6 ,1,'%/1d MN','Den: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (7 ,7 ,1,'%/1d N' ,'Den: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (4 ,4 ,1,'%/1d VD','Den: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_VD_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (5 ,5 ,1,'%/1d D' ,'Den: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_D_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (6 ,6 ,1,'%/1d MN','Den: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_MN_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (7 ,7 ,1,'%/1d N' ,'Den: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_N_%') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (8 ,8 ,2,'%/1m VD','Měsíc: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (9 ,9 ,2,'%/1m D' ,'Měsíc: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (10,10,2,'%/1m MN','Měsíc: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (11,11,2,'%/1m N' ,'Měsíc: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (8 ,8 ,2,'%/1m VD','Měsíc: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_VD_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (9 ,9 ,2,'%/1m D' ,'Měsíc: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_D_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (10,10,2,'%/1m MN','Měsíc: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_MN_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (11,11,2,'%/1m N' ,'Měsíc: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_N_%') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (12,12,3,'%/1y VD','Rok: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (13,13,3,'%/1y D' ,'Rok: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (14,14,3,'%/1y MN','Rok: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (15,15,3,'%/1y N' ,'Rok: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (12,12,3,'%/1y VD','Rok: Velmi dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_VD_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (13,13,3,'%/1y D' ,'Rok: Dobré RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_D_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (14,14,3,'%/1y MN','Rok: Mírně nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_MN_%') ;
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (15,15,3,'%/1y N' ,'Rok: Nepříznivé RP - četnosti v % podle OME','Zápis četnosti proběhne bez ohledu na množství dat','%','VI_N_%') ;
 
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (16,16,(select id from vix_c_interval where abbrev='1d'),'avg(1h)/1d)','Den: aritmetický průměr teploty','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','K');
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (17,17,(select id from vix_c_interval where abbrev='1m'),'avg(1h)/1m)','Měsíc: aritmetický průměr teploty','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','K');
-insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit) values (18,18,(select id from vix_c_interval where abbrev='1y'),'avg(1h)/1y)','Rok: aritmetický průměr teploty','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','K');
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (16,16,(select id from vix_c_interval where abbrev='1d'),'avg(1h)/1d)','Den: aritmetický průměr teploty','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','K','T2m_průměr_K');
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (17,17,(select id from vix_c_interval where abbrev='1m'),'avg(1h)/1m)','Měsíc: aritmetický průměr teploty','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','K','T2m_průměr_K');
+insert into vix_c_aggreg_type (id,fixed_id,id_interval,abbrev,name,description,unit,column_name) values (18,18,(select id from vix_c_interval where abbrev='1y'),'avg(1h)/1y)','Rok: aritmetický průměr teploty','Minimální počet dat pro provedení výpočtu je definován v databázi. Viz GagReport','K','T2m_průměr_K');
 
 delete from vix_c_class;
 insert into vix_c_class (id,class,code,name,description,value_from,value_to) values (1,1,'VD','Velmi dobré RP','četnost hodinových hodnot v %'     ,8600,null);
