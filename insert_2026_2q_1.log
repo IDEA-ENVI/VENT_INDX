@@ -1,0 +1,821 @@
+OraQ: Release 1.0.8818.25436 - Production on 05/26/2026 07:56:32
+Copyright (c) 2019-2024 IDEA-ENVIs.r.o. - All rights reserved.
+
+Connection Code: PHA_VIX
+         Server: pr-t5cluster-scan.chmi.cz
+   Service Name: CAQR.chmi.cz
+        User Id: vix
+ Server Version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP, Advanced Analytics and Real Application Testing options
+        Unicode: True
+Connection time: 0.602 sec.
+
+Start time: 2026-05-26 07:56:32
+
+SQL> delete from grid_p_primary_data
+0 row(s), time 0.0423 sec
+
+SQL> delete from grid_c_station
+0 row(s), time 0.0340 sec
+
+SQL> delete from grid_c_region_grid_cell
+0 row(s), time 0.0456 sec
+
+SQL> delete from grid_c_grid_cell
+0 row(s), time 0.0323 sec
+
+SQL> delete from grid_c_component
+0 row(s), time 0.0312 sec
+
+SQL> insert into grid_c_component (id,code,name,unit) values (1 ,'PBL','výška mezní vrstvy','m')
+1 row(s), time 0.1154 sec
+
+SQL> insert into grid_c_component (id,code,name,unit) values (2 ,'T2m','teplota vzduchu','K')
+1 row(s), time 0.0124 sec
+
+SQL> insert into grid_c_component (id,code,name,unit) values (3 ,'VI','ventilační index','m²/s')
+1 row(s), time 0.0312 sec
+
+SQL> delete from grid_c_database
+0 row(s), time 0.0348 sec
+
+SQL> insert into grid_c_database (id,code,name) values (1,'ISKO','Informační systém kvality ovzduší')
+1 row(s), time 0.0763 sec
+
+SQL> insert into grid_c_database (id,code,name) values (2,'Clidata','Meteorologické databáze')
+1 row(s), time 0.0317 sec
+
+SQL> insert into grid_c_database (id,code,name) values (3,'neurčeno','neurčeno')
+1 row(s), time 0.0166 sec
+
+SQL> delete from grid_c_region
+0 row(s), time 0.0325 sec
+
+SQL> insert into grid_c_region (id,code,name) values (01, 'A', 'Praha')
+1 row(s), time 0.0794 sec
+
+SQL> insert into grid_c_region (id,code,name) values (02, 'S', 'Středočeský')
+1 row(s), time 0.0160 sec
+
+SQL> insert into grid_c_region (id,code,name) values (03, 'C', 'Jihočeský')
+1 row(s), time 0.0332 sec
+
+SQL> insert into grid_c_region (id,code,name) values (04, 'P', 'Plzeňský')
+1 row(s), time 0.0297 sec
+
+SQL> insert into grid_c_region (id,code,name) values (05, 'K', 'Karlovarský')
+1 row(s), time 0.0175 sec
+
+SQL> insert into grid_c_region (id,code,name) values (06, 'U', 'Ústecký')
+1 row(s), time 0.0191 sec
+
+SQL> insert into grid_c_region (id,code,name) values (07, 'L', 'Liberecký')
+1 row(s), time 0.0310 sec
+
+SQL> insert into grid_c_region (id,code,name) values (08, 'H', 'Královéhradecký')
+1 row(s), time 0.0290 sec
+
+SQL> insert into grid_c_region (id,code,name) values (09, 'E', 'Pardubický')
+1 row(s), time 0.0158 sec
+
+SQL> insert into grid_c_region (id,code,name) values (10, 'J', 'Vysočina')
+1 row(s), time 0.0352 sec
+
+SQL> insert into grid_c_region (id,code,name) values (11, 'B', 'Jihomoravský')
+1 row(s), time 0.0136 sec
+
+SQL> insert into grid_c_region (id,code,name) values (12, 'M', 'Olomoucký')
+1 row(s), time 0.0353 sec
+
+SQL> insert into grid_c_region (id,code,name) values (13, 'Z', 'Zlínský')
+1 row(s), time 0.0277 sec
+
+SQL> insert into grid_c_region (id,code,name) values (14, 'T', 'Moravskoslezský')
+1 row(s), time 0.0177 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (520688)
+1 row(s), time 0.0783 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (521743)
+1 row(s), time 0.0171 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (517533)
+1 row(s), time 0.0311 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (520690)
+1 row(s), time 0.0159 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (521744)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (519637)
+1 row(s), time 0.0158 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (521737)
+1 row(s), time 0.0321 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (516478)
+1 row(s), time 0.0162 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (518587)
+1 row(s), time 0.0349 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (520690)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (517527)
+1 row(s), time 0.0157 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (520690)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (519638)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (518581)
+1 row(s), time 0.0162 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (522794)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (519637)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (521745)
+1 row(s), time 0.0324 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (480773)
+1 row(s), time 0.0161 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (487077)
+1 row(s), time 0.0394 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (472321)
+1 row(s), time 0.0248 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (469145)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (473335)
+1 row(s), time 0.0322 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (458613)
+1 row(s), time 0.0169 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (473356)
+1 row(s), time 0.0307 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (474425)
+1 row(s), time 0.0321 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (482850)
+1 row(s), time 0.0176 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475478)
+1 row(s), time 0.0530 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (472318)
+1 row(s), time 0.0257 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (474426)
+1 row(s), time 0.0158 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (477584)
+1 row(s), time 0.0321 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475476)
+1 row(s), time 0.0329 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475480)
+1 row(s), time 0.0331 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (474424)
+1 row(s), time 0.0289 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (472321)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (473372)
+1 row(s), time 0.0347 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (457593)
+1 row(s), time 0.0267 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (458613)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (468121)
+1 row(s), time 0.0162 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (453368)
+1 row(s), time 0.0321 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (474430)
+1 row(s), time 0.0170 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475482)
+1 row(s), time 0.0307 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (478648)
+1 row(s), time 0.0331 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (456506)
+1 row(s), time 0.0305 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (470119)
+1 row(s), time 0.0159 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (490133)
+1 row(s), time 0.0315 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475407)
+1 row(s), time 0.0176 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (479624)
+1 row(s), time 0.0302 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (462774)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (464880)
+1 row(s), time 0.0160 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (463828)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (470119)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (490133)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (481719)
+1 row(s), time 0.0254 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (466972)
+1 row(s), time 0.0274 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (479605)
+1 row(s), time 0.0273 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (485948)
+1 row(s), time 0.0247 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475407)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (502857)
+1 row(s), time 0.0244 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (517571)
+1 row(s), time 0.0384 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (516519)
+1 row(s), time 0.0470 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (518627)
+1 row(s), time 0.0390 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (501785)
+1 row(s), time 0.0256 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (513380)
+1 row(s), time 0.0278 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (550214)
+1 row(s), time 0.0137 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (532331)
+1 row(s), time 0.0449 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (513380)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (512295)
+1 row(s), time 0.0258 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (515465)
+1 row(s), time 0.0762 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (501785)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (552321)
+1 row(s), time 0.0249 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (543915)
+1 row(s), time 0.0202 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (524945)
+1 row(s), time 0.0253 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (523892)
+1 row(s), time 0.0339 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (525997)
+1 row(s), time 0.0292 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (525999)
+1 row(s), time 0.0294 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (537566)
+1 row(s), time 0.0161 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (548112)
+1 row(s), time 0.0355 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (524958)
+1 row(s), time 0.2556 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (532331)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (543901)
+1 row(s), time 0.0308 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (533369)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (451199)
+1 row(s), time 0.0322 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (484923)
+1 row(s), time 0.0329 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (473335)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494384)
+1 row(s), time 0.0353 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494384)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (483886)
+1 row(s), time 0.0374 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (487017)
+1 row(s), time 0.0336 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475454)
+1 row(s), time 0.0239 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (479654)
+1 row(s), time 0.0169 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (493358)
+1 row(s), time 0.2530 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (522732)
+1 row(s), time 0.0320 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (530120)
+1 row(s), time 0.0159 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (537483)
+1 row(s), time 0.0502 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (526954)
+1 row(s), time 0.0303 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (505915)
+1 row(s), time 0.0324 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (501681)
+1 row(s), time 0.0329 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (522733)
+1 row(s), time 0.0180 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (528014)
+1 row(s), time 0.0292 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (551231)
+1 row(s), time 0.0315 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (562830)
+1 row(s), time 0.0206 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (558615)
+1 row(s), time 0.0269 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (556521)
+1 row(s), time 0.0158 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (552303)
+1 row(s), time 0.0321 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (556492)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (553353)
+1 row(s), time 0.0362 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (547035)
+1 row(s), time 0.0120 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (555467)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (552307)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (559666)
+1 row(s), time 0.0173 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494469)
+1 row(s), time 0.0306 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (527093)
+1 row(s), time 0.0322 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (501812)
+1 row(s), time 0.0161 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (512345)
+1 row(s), time 0.0330 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494451)
+1 row(s), time 0.0314 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494452)
+1 row(s), time 0.0216 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (492361)
+1 row(s), time 0.0257 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (487087)
+1 row(s), time 0.0323 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (488129)
+1 row(s), time 0.0219 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (513397)
+1 row(s), time 0.0258 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494455)
+1 row(s), time 0.0253 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (503938)
+1 row(s), time 0.0222 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (492383)
+1 row(s), time 0.0584 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (499743)
+1 row(s), time 0.0217 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (523931)
+1 row(s), time 0.0304 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (497601)
+1 row(s), time 0.0475 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (519637)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (521746)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (516478)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (521737)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494384)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494405)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (486957)
+1 row(s), time 0.0239 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (502763)
+1 row(s), time 0.0261 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (503809)
+1 row(s), time 0.0139 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (504862)
+1 row(s), time 0.0361 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (505914)
+1 row(s), time 0.0131 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (505916)
+1 row(s), time 0.0369 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (503809)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (501681)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (495375)
+1 row(s), time 0.0325 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (504850)
+1 row(s), time 0.0192 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (514360)
+1 row(s), time 0.0283 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (523841)
+1 row(s), time 0.0176 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (523859)
+1 row(s), time 0.0371 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (515438)
+1 row(s), time 0.0253 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (513344)
+1 row(s), time 0.0165 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (524894)
+1 row(s), time 0.0314 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (523839)
+1 row(s), time 0.0221 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (524892)
+1 row(s), time 0.0290 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (516502)
+1 row(s), time 0.0151 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (529111)
+1 row(s), time 0.0264 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (537553)
+1 row(s), time 0.0320 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (511223)
+1 row(s), time 0.0227 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (500669)
+1 row(s), time 0.0380 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (530190)
+1 row(s), time 0.0194 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (526998)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (524895)
+1 row(s), time 0.0325 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (512255)
+1 row(s), time 0.0261 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (490280)
+1 row(s), time 0.0223 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (514465)
+1 row(s), time 0.0163 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (503938)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (502918)
+1 row(s), time 0.0162 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (498698)
+1 row(s), time 0.0485 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (503965)
+1 row(s), time 0.0392 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (505017)
+1 row(s), time 0.0250 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (513416)
+1 row(s), time 0.0190 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (508181)
+1 row(s), time 0.0450 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (508181)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (497647)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (507120)
+1 row(s), time 0.0157 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (507119)
+1 row(s), time 0.0321 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (508172)
+1 row(s), time 0.0328 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (506066)
+1 row(s), time 0.0178 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (507116)
+1 row(s), time 0.0292 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (506063)
+1 row(s), time 0.0159 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (508172)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (505015)
+1 row(s), time 0.0249 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (506068)
+1 row(s), time 0.0259 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (492380)
+1 row(s), time 0.0213 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (512373)
+1 row(s), time 0.0257 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (505012)
+1 row(s), time 0.0271 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (494499)
+1 row(s), time 0.0187 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (509228)
+1 row(s), time 0.0320 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (500796)
+1 row(s), time 0.0163 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (498707)
+1 row(s), time 0.0332 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (498708)
+1 row(s), time 0.0201 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (511336)
+1 row(s), time 0.0258 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (539636)
+1 row(s), time 0.0193 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (536452)
+1 row(s), time 0.0349 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (544885)
+1 row(s), time 0.0255 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (544894)
+1 row(s), time 0.0241 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (551216)
+1 row(s), time 0.0240 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (554405)
+1 row(s), time 0.0317 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (532244)
+1 row(s), time 0.0157 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (555433)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (539636)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (540666)
+1 row(s), time 0.0318 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (552263)
+1 row(s), time 0.0162 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (546992)
+1 row(s), time 0.0320 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (543847)
+1 row(s), time 0.0413 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (539605)
+1 row(s), time 0.0226 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (542779)
+1 row(s), time 0.0330 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (546985)
+1 row(s), time 0.0315 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (556482)
+1 row(s), time 0.0323 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (538590)
+1 row(s), time 0.0160 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (549104)
+1 row(s), time 0.0372 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (536452)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (550163)
+1 row(s), time 0.0161 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (551215)
+1 row(s), time 0.0322 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (551216)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (550163)
+[ERROR] [ERROR] ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+ORA-00001: unique constraint (VIX.UQ_GRID_C_GRID_CELL_01) violated
+
+
+SQL> insert into grid_c_grid_cell (grid_number) values (564920)
+1 row(s), time 0.0319 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (474454)
+1 row(s), time 0.0281 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (488161)
+1 row(s), time 0.0248 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (467097)
+1 row(s), time 0.0276 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (477609)
+1 row(s), time 0.0161 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (468133)
+1 row(s), time 0.0317 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (488156)
+1 row(s), time 0.0330 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (481839)
+1 row(s), time 0.0315 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (476564)
+1 row(s), time 0.0325 sec
+
+SQL> insert into grid_c_grid_cell (grid_number) values (475511)
+1 row(s), time 0.0153 sec
+
+SQL> insert into grid_c_region_grid_cell (id_region,id_grid_cell) SELECT distinct gcr.id as id_region,gcgc.id as id_grid_cell from vix_c_station_grid sg join vix_c_region_grid rg on rg.id=sg.id_region_grid join grid_c_region gcr on gcr.code=rg.code join grid_c_grid_cell gcgc on gcgc.grid_number=sg.grid_number
+196 row(s), time 0.1926 sec
+
+SQL> insert into grid_c_station (code,name,id_grid_cell,id_database,description) SELECT sg.code as station_code,sg.name as station_name,gcgl.id as id_grid_cell,gcd.id as id_database,sg.description from vix_c_station_grid sg join vix_c_database_grid dg on dg.id=sg.id_database_grid join grid_c_database gcd on gcd.code=dg.code join grid_c_grid_cell gcgl on gcgl.grid_number=sg.grid_number join vix_c_region_grid vcr on vcr.id=sg.id_region_grid join grid_c_region gcr on gcr.code=vcr.code join grid_c_region_grid_cell gcrgc on gcrgc.id_region=gcr.id and gcrgc.id_grid_cell=gcgl.id
+222 row(s), time 0.1759 sec
+
+SQL> exit
+
+End time: 2026-05-26 07:56:41 (elapsed: 0:8.413 sec)
