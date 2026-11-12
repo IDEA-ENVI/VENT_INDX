@@ -1,0 +1,12 @@
+OraQ: Release 1.0.8818.25436 - Production on 11/11/2026 12:11:01
+Copyright (c) 2019-2024 IDEA-ENVIs.r.o. - All rights reserved.
+
+Connection Code: VM_VIX
+         Server: jeseter
+   Service Name: jeseter
+        User Id: vix
+ Server Version: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+        Unicode: True
+Connection time: 0.262 sec.
+
+[ERROR] Soubor c:\dev\chmu\VENT_INDX\new_2026_4q\vix_aggreg_t.sql nebyl nalezen.

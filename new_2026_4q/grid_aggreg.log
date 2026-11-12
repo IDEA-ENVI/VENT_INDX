@@ -1,0 +1,25 @@
+OraQ: Release 1.0.8818.25436 - Production on 11/12/2026 08:26:42
+Copyright (c) 2019-2024 IDEA-ENVIs.r.o. - All rights reserved.
+
+Connection Code: VM_VIX
+         Server: jeseter
+   Service Name: jeseter
+        User Id: vix
+ Server Version: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+        Unicode: True
+Connection time: 0.260 sec.
+
+Start time: 2026-11-12 08:26:42
+
+SQL> create or replace procedure grid_aggreg (year in number) as begin -- Procedura pocita agregovane udaje pro ventilacni index typu GRID -- Vypocet probiha podle zadani ukolu c.1 za 4.q.2026 -- nov 2026-11-11 declare w_start_time date; w_end_time date; w_count number(8,0); begin delete from vix.grid_c_data_record_tmp; insert into vix.grid_c_data_record_tmp (id_station, id_component, start_time, end_time) select distinct r.id_station, r.id_component, m.mesic /*+ 1/24*/ as start_time, add_months(m.mesic, 1) /*+ 1/24*/ as end_time from vix.grid_c_data_record r cross apply ( select add_months(trunc(r.start_time, 'MM'), level - 1) as mesic from dual connect by level <= months_between(trunc(r.end_time - 1/86400, 'MM'), trunc(r.start_time, 'MM')) + 1 ) m; delete from vix.grid_c_data_record; insert into vix.grid_c_data_record (id_station, id_component, start_time, end_time) select id_station, id_component, start_time, end_time from vix.grid_c_data_record_tmp; grid_aggreg_pbl(1); -- výpočet pbl commit; grid_aggreg_t(2); -- výpočet teploty commit; grid_aggreg_vix(3); -- výpočet ventilačního indexu commit; delete from vix.grid_c_data_record; delete from vix.grid_c_data_record_tmp; commit; end; end grid_aggreg;
+0 row(s), time 0.0638 sec
+
+SQL> grant execute on grid_aggreg to vix_rw_role
+-1 row(s), time 0.0000 sec
+
+SQL> create or replace public synonym grid_aggreg for grid_aggreg
+-1 row(s), time 0.0157 sec
+
+SQL> exit
+
+End time: 2026-11-12 08:26:43 (elapsed: 0:0.085 sec)

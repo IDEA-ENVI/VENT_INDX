@@ -1,0 +1,220 @@
+OraQ: Release 1.0.8818.25436 - Production on 11/11/2026 10:25:59
+Copyright (c) 2019-2024 IDEA-ENVIs.r.o. - All rights reserved.
+
+Connection Code: VM_VIX
+         Server: jeseter
+   Service Name: jeseter
+        User Id: vix
+ Server Version: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+        Unicode: True
+Connection time: 0.248 sec.
+
+Start time: 2026-11-11 10:25:59
+
+SQL> drop table grid_c_value_type cascade constraint
+-1 row(s), time 0.0191 sec
+
+SQL> create table grid_c_value_type ( id number(8,0) not null , fixed_id number(4) not null, abbrev varchar2(20) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null )
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_c_value_type add constraint pk_grid_c_value_type primary key (id)
+-1 row(s), time 0.0161 sec
+
+SQL> create unique index indx_grid_c_value_type on grid_c_value_type (fixed_id)
+-1 row(s), time 0.0000 sec
+
+SQL> grant select,insert,update,delete on grid_c_value_type to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> drop table grid_c_class cascade constraint
+-1 row(s), time 0.0164 sec
+
+SQL> create table grid_c_class ( id number(8,0) not null , class number(2,0) not null, code varchar2(6) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null, value_from float not null, value_to float )
+-1 row(s), time 0.0135 sec
+
+SQL> alter table grid_c_class add constraint pk_grid_c_class primary key (id)
+-1 row(s), time 0.0019 sec
+
+SQL> create unique index indx_grid_c_class_01 on grid_c_class (class)
+-1 row(s), time 0.0000 sec
+
+SQL> create unique index indx_grid_c_class_02 on grid_c_class (code)
+-1 row(s), time 0.0000 sec
+
+SQL> grant select,insert,update,delete on grid_c_class to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> drop table grid_c_interval cascade constraint
+-1 row(s), time 0.0107 sec
+
+SQL> create table grid_c_interval ( id number(8,0) not null , interval nvarchar2(19) not null , abbrev nvarchar2(10) not null )
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_c_interval add constraint pk_grid_c_interval primary key (id)
+-1 row(s), time 0.0148 sec
+
+SQL> grant select,insert,update,delete on grid_c_interval to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> drop table grid_c_aggreg_type cascade constraint
+-1 row(s), time 0.0166 sec
+
+SQL> create table grid_c_aggreg_type ( id number(8,0) not null , fixed_id number(4) not null, id_interval number(8,0) not null , id_grid_component number(8,0) not null , abbrev varchar2(20) not null, name nvarchar2(80) not null, description nvarchar2(1600) not null, unit nvarchar2(50) not null, column_name varchar2(30 CHAR) not null )
+-1 row(s), time 0.0125 sec
+
+SQL> alter table grid_c_aggreg_type add constraint pk_grid_c_aggreg_type primary key (id)
+-1 row(s), time 0.0000 sec
+
+SQL> create unique index indx_grid_c_aggreg_type on grid_c_aggreg_type (fixed_id)
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_c_aggreg_type add constraint fk_grid_c_aggreg_type_01 foreign key (id_interval) references grid_c_interval (id)
+-1 row(s), time 0.0158 sec
+
+SQL> alter table grid_c_aggreg_type add constraint fk_grid_c_aggreg_type_02 foreign key (id_grid_component) references grid_c_component (id)
+-1 row(s), time 0.0046 sec
+
+SQL> grant select,insert,update,delete on grid_c_aggreg_type to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> drop table grid_p_primary_data cascade constraint
+-1 row(s), time 0.0116 sec
+
+SQL> create table grid_p_primary_data ( id_station number(8,0) not null , id_component number(8,0) not null , id_value_type number(8,0) not null , end_time date not null, value float not null )
+-1 row(s), time 0.0027 sec
+
+SQL> alter table grid_p_primary_data add constraint pk_grid_p_primary primary key (id_station,id_component,end_time)
+-1 row(s), time 0.0135 sec
+
+SQL> alter table grid_p_primary_data add constraint fk_grid_p_primary_01 foreign key (id_station) references grid_c_station (id)
+-1 row(s), time 0.0158 sec
+
+SQL> alter table grid_p_primary_data add constraint fk_grid_p_primary_02 foreign key (id_component) references grid_c_component (id)
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_p_primary_data add constraint fk_grid_p_primary_03 foreign key (id_value_type) references grid_c_value_type (id)
+-1 row(s), time 0.0000 sec
+
+SQL> alter table GRID_P_PRIMARY_DATA add start_time date generated always as (end_time - interval '1' hour) virtual
+-1 row(s), time 0.0159 sec
+
+SQL> create unique index UK_GRID_P_PRIMARY_01 on GRID_P_PRIMARY_DATA (ID_STATION, ID_COMPONENT, START_TIME) tablespace VIX pctfree 10 initrans 2 maxtrans 255 storage ( initial 64K next 1M minextents 1 maxextents unlimited ) online
+-1 row(s), time 0.0000 sec
+
+SQL> grant select,insert,update,delete on grid_p_primary_data to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> drop table grid_s_secondary_data cascade constraint
+-1 row(s), time 0.0164 sec
+
+SQL> create table grid_s_secondary_data ( id_station number(8,0) not null , id_component number(8,0) not null , id_aggreg_type number(8,0) not null , start_time date not null, value float )
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_s_secondary_data add constraint pk_grid_s_secondary_data primary key (id_station,id_component,id_aggreg_type,start_time)
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_s_secondary_data add constraint fk_grid_s_secondary_data_01 foreign key (id_station) references grid_c_station (id)
+-1 row(s), time 0.0000 sec
+
+SQL> alter table grid_s_secondary_data add constraint fk_grid_s_secondary_data_02 foreign key (id_component) references grid_c_component (id)
+-1 row(s), time 0.0154 sec
+
+SQL> alter table grid_s_secondary_data add constraint fk_grid_s_secondary_data_03 foreign key (id_aggreg_type) references grid_c_aggreg_type (id)
+-1 row(s), time 0.0000 sec
+
+SQL> grant select,insert,update,delete on grid_s_secondary_data to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> drop table grid_c_data_record cascade constraint
+-1 row(s), time 0.0074 sec
+
+SQL> create table grid_c_data_record ( id NUMBER(8) generated by default as identity, id_station NUMBER(8) not null, id_component NUMBER(8) not null, start_time DATE not null, end_time DATE not null )
+-1 row(s), time 0.0073 sec
+
+SQL> alter table grid_c_data_record add constraint pk_grid_c_data_record primary key (id)
+-1 row(s), time 0.0015 sec
+
+SQL> alter table grid_c_data_record add constraint FK_grid_c_data_record_01 foreign key (ID_COMPONENT) references GRID_C_COMPONENT (ID)
+-1 row(s), time 0.0069 sec
+
+SQL> alter table grid_c_data_record add constraint FK_grid_c_data_record_02 foreign key (ID_STATION) references GRID_C_STATION (ID)
+-1 row(s), time 0.0000 sec
+
+SQL> grant select,insert,update,delete on grid_c_data_record to grid_rw_role
+[ERROR] [ERROR] ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+ORA-01917: uživatel nebo role 'GRID_RW_ROLE' neexistuje
+
+
+SQL> CREATE INDEX vix.ix_grid_c_data_record_01 ON vix.grid_c_data_record (id_station, id_component, start_time)
+-1 row(s), time 0.0000 sec
+
+SQL> CREATE INDEX vix.ix_grid_c_data_record_02 ON vix.grid_c_data_record (id_component)
+-1 row(s), time 0.0000 sec
+
+SQL> ALTER TABLE vix.grid_c_data_record ADD CONSTRAINT ck_grid_c_data_record_01 CHECK (end_time >= start_time)
+-1 row(s), time 0.0000 sec
+
+SQL> CREATE INDEX vix.ix_grid_c_station_01 ON vix.grid_c_station (id_grid_cell)
+[ERROR] [ERROR] ORA-00955: název je již užíván existujícím objektem
+ORA-00955: název je již užíván existujícím objektem
+
+
+SQL> CREATE INDEX vix.ix_grid_c_station_02 ON vix.grid_c_station (id_database)
+[ERROR] [ERROR] ORA-00955: název je již užíván existujícím objektem
+ORA-00955: název je již užíván existujícím objektem
+
+
+SQL> CREATE INDEX vix.ix_grid_c_region_grid_cell_01 ON vix.grid_c_region_grid_cell (id_grid_cell)
+[ERROR] [ERROR] ORA-01408: tento seznam sloupců už byl indexován
+ORA-01408: tento seznam sloupců už byl indexován
+
+
+SQL> CREATE INDEX vix.ix_grid_c_aggreg_type_01 ON vix.grid_c_aggreg_type (id_interval)
+-1 row(s), time 0.0000 sec
+
+SQL> CREATE INDEX vix.ix_grid_c_aggreg_type_02 ON vix.grid_c_aggreg_type (id_grid_component)
+-1 row(s), time 0.0000 sec
+
+SQL> ALTER TABLE vix.grid_c_interval ADD CONSTRAINT uq_grid_c_interval_01 UNIQUE (abbrev)
+-1 row(s), time 0.0000 sec
+
+SQL> ALTER TABLE vix.grid_c_aggreg_type ADD CONSTRAINT uq_grid_c_aggreg_type_01 UNIQUE (id_interval, column_name)
+-1 row(s), time 0.0171 sec
+
+SQL> DROP INDEX vix.ix_grid_c_region_grid_cell_01
+[ERROR] [ERROR] ORA-01418: specifikovaný index neexistuje
+ORA-01418: specifikovaný index neexistuje
+
+
+SQL> ALTER TABLE vix.grid_c_region_grid_cell ADD CONSTRAINT uq_grid_c_region_grid_cell_02 UNIQUE (id_grid_cell)
+[ERROR] [ERROR] ORA-02261: tento jednoznačný nebo primární klíč již v tabulce existuje
+ORA-02261: tento jednoznačný nebo primární klíč již v tabulce existuje
+
+
+SQL> CREATE INDEX vix.ix_grid_p_primary_01 ON vix.grid_p_primary_data (id_component, start_time)
+-1 row(s), time 0.0000 sec
+
+SQL> CREATE INDEX vix.ix_grid_s_secondary_data_01 ON vix.grid_s_secondary_data (id_aggreg_type, start_time)
+-1 row(s), time 0.0000 sec
+
+SQL> ALTER TABLE vix.grid_c_aggreg_type ADD CONSTRAINT uq_grid_c_aggreg_type_02 UNIQUE (id, id_grid_component)
+-1 row(s), time 0.0130 sec
+
+SQL> ALTER TABLE vix.grid_s_secondary_data ADD CONSTRAINT fk_grid_s_secondary_data_04 FOREIGN KEY (id_aggreg_type, id_component) REFERENCES vix.grid_c_aggreg_type (id, id_grid_component)
+-1 row(s), time 0.0000 sec
+
+SQL> exit
+
+End time: 2026-11-11 10:25:59 (elapsed: 0:0.327 sec)

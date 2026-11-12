@@ -49,7 +49,7 @@ create table grid_c_region_grid_cell
    id_region number(8,0) not null,
    id_grid_cell number(8,0) not null
 );
-alter table grid_c_region_grid_cell add constraint pk_grid_c_regfion_grid_cell primary key (id) ;
+alter table grid_c_region_grid_cell add constraint pk_grid_c_region_grid_cell primary key (id) ;
 create unique index uq_grid_c_region_grid_cell_01 on grid_c_region_grid_cell (id_region,id_grid_cell);
 grant select,insert,update,delete on grid_c_region_grid_cell to vix_rw_role;
 alter table grid_c_region_grid_cell add constraint   fk_grid_c_region_grid_cell_01 foreign key (id_region) references grid_c_region (id);
